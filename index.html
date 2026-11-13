@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Молодіжний простір «Повір у себе»</title>
-<meta name="description" content="Молодіжний простір «Повір у себе» на базі Степанівського ліцею: де ми, наші ініціативи для громади, команда, анкети та контакти.">
+<meta name="description" content="Молодіжний простір «Повір у себе» на базі Степанівського ліцею: де ми, ідеї для громади, команда, анкети та контакти.">
 <link rel="canonical" href="https://molodprostir.com.ua/">
 <meta property="og:title" content="Молодіжний простір «Повір у себе»">
 <meta property="og:description" content="Місце, де ідеї учнів стають справами. Пройдіть анкету та долучайтеся.">
@@ -200,7 +200,7 @@
   .sh-star svg { width: clamp(3.5rem, 7vw, 6.5rem); height: auto; animation: spin 16s linear infinite; }
   .sh-wave { --k: -30; --d: 1.1s; left: 38%; top: 34%; color: #fff; }
   .sh-wave svg { width: clamp(6rem, 13vw, 12rem); height: auto; }
-  .badge { --k: 14; --d: 1.2s; right: 6%; top: 44%; }
+  .badge { --k: 14; --d: 1.2s; right: 9%; top: 17%; }
   .badge a { position: relative; display: grid; place-items: center; width: clamp(7rem, 13vw, 10.5rem); aspect-ratio: 1; border-radius: 50%; background: var(--clay); color: #fff; text-decoration: none; }
   .badge svg { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 18s linear infinite; }
   .badge b { font-family: var(--display); font-weight: 700; font-size: clamp(.8rem, 1.3vw, 1.05rem); color: var(--sun); transition: transform .4s var(--ease); }
@@ -279,7 +279,7 @@
 
   /* ---------- Анкети ---------- */
   .surveys .lead { max-width: 56ch; margin: 1.2rem 0 3rem; }
-  .cards { display: grid; gap: 1.75rem; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); perspective: 1200px; }
+  .cards { display: grid; gap: 1.75rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); perspective: 1200px; }
   .card {
     display: flex; flex-direction: column; height: 100%; min-height: 17rem;
     padding: 1.8rem; border-radius: 8px 36px 8px 8px;
@@ -290,7 +290,11 @@
   .card:hover { --lift: -8px; box-shadow: 0 24px 40px -18px rgba(27, 37, 89, .45); }
   .card-wrap:nth-child(3n+2) .card { background: var(--mint); }
   .card-wrap:nth-child(3n+3) .card { background: var(--pink); }
-  .card h3 { font-size: 1.3rem; font-weight: 700; }
+  .card h3 { font-size: clamp(1.25rem, 2.2vw, 1.6rem); font-weight: 700; }
+  .card { position: relative; overflow: hidden; isolation: isolate; }
+  .card::after { content: ""; position: absolute; z-index: -1; right: -3rem; bottom: -3rem; width: 10rem; height: 10rem; border-radius: 50%; background: rgba(255, 255, 255, .35); transition: transform .8s var(--ease); }
+  .card:hover::after { transform: scale(1.4); }
+  .card .tag-n { font-family: var(--display); font-weight: 900; font-size: .9rem; opacity: .55; margin-bottom: .8rem; }
   .card p { margin: .9rem 0 1.5rem; font-size: 1rem; }
   .card .when { margin: auto 0 1rem; font-size: .95rem; font-weight: 600; }
   .card .btn { align-self: flex-start; background: var(--ink); color: #fff; }
@@ -300,18 +304,26 @@
 
   /* ---------- Контакти ---------- */
   .contacts .lead { max-width: 46ch; color: inherit; margin: 1.2rem 0 3rem; }
-  .ctiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
-  .ctiles .wide { grid-column: span 2; grid-row: span 2; }
+  .ctiles { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 1.5rem; }
+  .ctiles .wide { grid-row: span 2; }
   .ctile { position: relative; overflow: hidden; isolation: isolate; display: flex; flex-direction: column; height: 100%; min-height: 9.5rem; padding: 1.6rem; border-radius: 8px 34px 8px 8px; background: var(--paper); color: var(--ink); text-decoration: none; transition: transform .45s var(--ease), box-shadow .45s ease; }
   a.ctile:hover { transform: translateY(-8px) rotate(-1deg); box-shadow: 0 26px 40px -20px rgba(27, 37, 89, .5); }
   .ctile small { font-size: .9rem; font-weight: 600; }
   .ctile b { font-family: var(--display); font-weight: 700; font-size: 1.05rem; line-height: 1.25; margin-top: auto; padding-top: 1.2rem; overflow-wrap: anywhere; }
   .ctile span { margin-top: .5rem; font-size: .95rem; }
+  .ctile b.mail { font-family: var(--body); font-weight: 600; font-size: clamp(1.05rem, 1.7vw, 1.3rem); letter-spacing: -.01em; overflow-wrap: normal; word-break: normal; }
+  .ctile .row { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; margin-top: .9rem; }
+  .ctile .row span { margin: 0; }
+  .ctile a.mail-a { margin-top: auto; padding-top: 1.2rem; }
+  .ctile a.mail-a b { padding-top: 0; margin-top: 0; display: block; }
+  .copy { font: inherit; font-size: .9rem; font-weight: 600; color: var(--ink); background: rgba(255, 255, 255, .6); border: 0; border-radius: 999px; padding: .45rem .95rem; cursor: pointer; transition: background-color .3s ease; position: relative; z-index: 2; }
+  .copy:hover { background: #fff; }
   .ctile.c1 { background: var(--sun); }
   .ctile.c2 { background: var(--mint); }
   .ctile.c3 { background: var(--pink); }
   .ctile.fb { background: var(--cobalt); color: #fff; min-height: 20rem; }
-  .ctile.fb b { font-size: clamp(1.5rem, 3.2vw, 2.6rem); font-weight: 900; max-width: 12ch; }
+  .ctile.fb b { font-size: clamp(1.5rem, 3.2vw, 2.6rem); font-weight: 900; max-width: min(11ch, 62%); position: relative; }
+  .ctile.fb::after { display: none; }
   .ctile.fb span { max-width: 38ch; }
   .ctile.fb::before { content: ""; position: absolute; z-index: -1; right: -5rem; top: -5rem; width: 17rem; height: 17rem; border-radius: 50%; background: var(--sun); transition: transform .8s var(--ease); }
   .ctile.fb::after { content: ""; position: absolute; z-index: -1; right: 9rem; top: 5.5rem; width: 4.5rem; height: 2.25rem; border-radius: 999px 999px 0 0; background: var(--mint); transition: transform .8s var(--ease); }
@@ -351,7 +363,7 @@
   /* ---------- Засади, правила, документи ---------- */
   .lead-w { max-width: 60ch; margin: 1.2rem 0 0; }
   .lead-w a { text-decoration-color: var(--sun); text-underline-offset: .25em; }
-  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.25rem; margin: 3rem 0 0; padding: 0; list-style: none; }
+  .tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; margin: 3rem 0 0; padding: 0; list-style: none; }
   .tile { position: relative; isolation: isolate; overflow: hidden; height: 100%; padding: 1.6rem; border-radius: 22px; border: 1px solid rgba(255, 255, 255, .3); background: rgba(255, 255, 255, .1); transition: color .45s ease; }
   .tile::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--sun); clip-path: circle(0% at var(--mx, 50%) var(--my, 50%)); transition: clip-path .7s var(--ease); }
   .tile:hover { color: var(--ink); }
@@ -364,7 +376,7 @@
   .rules svg { width: 2.2rem; height: 2.2rem; }
   .rules path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .7s ease .5s; }
   .rules li.in path { stroke-dashoffset: 0; }
-  .docs { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+  .docs { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.5rem; margin-top: 2rem; }
   .doc { position: relative; display: flex; flex-direction: column; height: 100%; min-height: 15rem; padding: 1.6rem; background: #fff; color: var(--ink); border-radius: 6px; clip-path: polygon(0 0, calc(100% - 2.6rem) 0, 100% 2.6rem, 100% 100%, 0 100%); transition: transform .45s var(--ease); }
   .doc::after { content: ""; position: absolute; top: 0; right: 0; width: 2.6rem; height: 2.6rem; background: #C5CCEE; border-bottom-left-radius: 6px; transform-origin: top right; transition: transform .45s var(--ease); }
   .doc:hover { transform: translateY(-10px) rotate(-1.2deg); }
@@ -411,49 +423,49 @@
   .where-actions .btn:hover { color: var(--ink); }
   .where-actions .btn.alt { background: var(--sun); color: var(--ink); }
 
-  /* ---------- Ініціативи ---------- */
-  .inits-head { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 1.5rem 4rem; align-items: end; }
-  .inits-head p { margin: 0; max-width: 46ch; }
-  .inits { display: grid; grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
-  .init { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; height: 100%; min-height: 19rem; padding: 1.8rem; border-radius: 30px 8px 30px 8px; background: #fff; color: var(--ink); transition: transform .45s var(--ease), box-shadow .45s ease; }
-  .init:hover { transform: translateY(-10px) rotate(-.8deg); box-shadow: 0 30px 50px -26px rgba(10, 16, 60, .6); }
-  .init::before { content: ""; position: absolute; z-index: -1; right: -3.5rem; top: -3.5rem; width: 10rem; height: 10rem; border-radius: 50%; background: var(--c, var(--sun)); transition: transform .8s var(--ease); }
-  .init:hover::before { transform: scale(1.5); }
-  .init .n { font-family: var(--display); font-weight: 900; font-size: 3.4rem; line-height: 1; color: transparent; -webkit-text-stroke: 2px var(--ink); }
-  .init .ico { position: absolute; top: 1.5rem; right: 1.5rem; width: 2.6rem; height: 2.6rem; color: var(--ink); }
-  .init h3 { font-size: 1.25rem; font-weight: 700; margin: 1.2rem 0 .6rem; }
-  .init p { margin: 0 0 1.4rem; font-size: 1rem; }
-  .init .st { margin-top: auto; align-self: flex-start; padding: .35rem .85rem; border-radius: 999px; border: 2px solid var(--ink); font-size: .85rem; font-weight: 600; }
-  .init .st.go { background: var(--mint); border-color: var(--mint); }
-  .init .st.ok { background: var(--ink); border-color: var(--ink); color: #fff; }
-  .init .pic { margin: -1.8rem -1.8rem 1.2rem; aspect-ratio: 16 / 10; overflow: hidden; }
-  .init .pic img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
-  .init:hover .pic img { transform: scale(1.06); }
-  .init.has-pic::before { display: none; }
-  .init.has-pic .ico { display: none; }
-  .init-own { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; margin-top: 2.5rem; padding: 1.6rem 1.8rem; border-radius: 22px; border: 2px dashed rgba(255, 255, 255, .55); }
-  .init-own p { margin: 0; max-width: 52ch; font-weight: 500; }
+  /* ---------- Ідеї для громади ---------- */
+  .ideas-head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 1.5rem 4rem; align-items: end; }
+  .ideas-head p { margin: 0; max-width: 48ch; }
+  .ideas-sub { margin: 4rem 0 0; font-family: var(--display); font-weight: 700; font-size: clamp(1.1rem, 2vw, 1.4rem); display: flex; align-items: center; gap: .9rem; }
+  .ideas-sub::after { content: ""; flex: 1; height: 2px; background: currentColor; opacity: .3; }
+  .ideas { list-style: none; margin: 1.8rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+  .idea { position: relative; isolation: isolate; overflow: hidden; height: 100%; min-height: 14.5rem; display: flex; flex-direction: column; padding: 1.6rem 1.6rem 1.7rem; border-radius: 28px 8px 28px 8px; background: #fff; color: var(--ink); transition: transform .45s var(--ease), box-shadow .45s ease; }
+  .idea::before { content: ""; position: absolute; z-index: -1; right: -2.6rem; top: -2.6rem; width: 8rem; height: 8rem; border-radius: 50%; background: var(--c, var(--sun)); transition: transform .9s var(--ease); }
+  .idea:hover { transform: translateY(-8px) rotate(-.6deg); box-shadow: 0 30px 50px -26px rgba(10, 16, 60, .6); }
+  .idea:hover::before { transform: scale(6); }
+  .idea svg { position: absolute; top: 1.15rem; right: 1.15rem; width: 2.3rem; height: 2.3rem; }
+  .idea small { font-size: .82rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; opacity: .65; padding-right: 3.5rem; }
+  .idea p { margin: auto 0 0; padding-top: 2.2rem; font-family: var(--display); font-weight: 700; font-size: clamp(1.02rem, 1.5vw, 1.2rem); line-height: 1.3; }
+  .ideas li:nth-child(3n+1) .idea { --c: var(--sun); }
+  .ideas li:nth-child(3n+2) .idea { --c: var(--mint); }
+  .ideas li:nth-child(3n+3) .idea { --c: var(--pink); }
+  .idea-cta { position: relative; overflow: hidden; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem 2.5rem; align-items: center; margin-top: 2.5rem; padding: clamp(1.6rem, 4vw, 2.6rem); border-radius: 30px; background: var(--sun); color: var(--ink); }
+  .idea-cta::before { content: ""; position: absolute; z-index: -1; left: -4rem; bottom: -6rem; width: 14rem; height: 14rem; border-radius: 50%; background: rgba(255, 255, 255, .45); }
+  .idea-cta h3 { font-size: clamp(1.35rem, 3vw, 2.1rem); font-weight: 900; }
+  .idea-cta p { margin: .6rem 0 0; max-width: 52ch; }
+  .idea-cta .btn { background: var(--ink); color: #fff; white-space: nowrap; }
+  .idea-cta .btn:hover { color: var(--ink); }
+  .idea-cta .note { display: block; margin-top: .8rem; font-size: .92rem; opacity: .8; }
 
   /* ---------- Команда ---------- */
   .team-head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 1.5rem 4rem; align-items: end; }
   .team-head p { margin: 0; max-width: 46ch; }
-  .team { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+  .team { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
   .member { text-align: center; }
   .member .ava { position: relative; width: 100%; aspect-ratio: 1; border-radius: 50% 50% 22px 50%; overflow: hidden; background: var(--c, var(--sun)); display: grid; place-items: end center; transition: border-radius .6s var(--ease), transform .5s var(--ease); }
   .member:hover .ava { border-radius: 22px 50% 50% 50%; transform: rotate(-2deg); }
   .member .ava img { width: 100%; height: 100%; object-fit: cover; }
   .member .ava svg { width: 70%; height: auto; color: rgba(27, 37, 89, .28); }
-  .member h3 { font-size: 1.1rem; font-weight: 700; margin: 1.1rem 0 .3rem; }
+  .member h3 { font-size: clamp(.92rem, 1.6vw, 1.1rem); font-weight: 700; margin: 1.1rem 0 .3rem; }
   .member .role { margin: 0; font-weight: 600; color: var(--clay); font-size: .95rem; }
   .member .about { margin: .5rem auto 0; font-size: .95rem; max-width: 26ch; }
   .member.ghost .ava::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .45) 50%, transparent 70%); background-size: 250% 100%; animation: shimmer 2.6s ease-in-out infinite; }
   .member.ghost h3, .member.ghost .role { color: var(--ink); opacity: .55; }
   .team-soon { margin-top: 2.5rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
-  .team-soon .tag { font-family: var(--display); font-weight: 700; font-size: 1rem; padding: .55rem 1.1rem; border-radius: 999px; background: var(--ink); color: var(--sun); }
+  .team-soon .tag { font-family: var(--display); font-weight: 700; font-size: clamp(.82rem, 1.4vw, 1rem); text-align: center; padding: .55rem 1.1rem; border-radius: 999px; background: var(--ink); color: var(--sun); }
   .team-soon .btn { background: var(--sun); }
   @keyframes shimmer { from { background-position: 150% 0; } to { background-position: -100% 0; } }
 
-  html.calm .init-own { border-color: rgba(74, 58, 53, .3); }
   html.calm .where li { background: var(--rose); }
 
   /* ---------- Спокійний режим ---------- */
@@ -474,6 +486,10 @@
   html.calm .rules path { stroke-dashoffset: 0; }
   html.calm .intro, html.calm #replay, html.calm .cursor { display: none !important; }
 
+  @media (max-width: 1100px) {
+    .ideas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
   @media (max-width: 800px) {
     .nav, .calm-btn { font-size: .85rem; }
     .photos, .lic { grid-template-columns: 1fr; }
@@ -488,7 +504,7 @@
     .sh-sun { top: 9%; right: -5rem; }
     .sh-wave { left: 8%; top: 37%; }
     .sh-star { right: 52%; top: 26%; }
-    .badge { right: 5%; top: 36%; }
+    .badge { right: 5%; top: 30%; }
     .can li { grid-template-columns: 2.6rem 1fr; }
     .can p { grid-column: 2; }
     .steps { grid-template-columns: 1fr; padding-top: 0; padding-left: 3rem; gap: 3rem; }
@@ -498,11 +514,18 @@
     .ctiles { grid-template-columns: 1fr; }
     .ctiles .wide { grid-column: auto; }
     .ctile.fb { min-height: 17rem; }
-    .ctile.fb::before { width: 9rem; height: 9rem; right: -3rem; top: -3.5rem; }
+    .ctile.fb::before { width: 7rem; height: 7rem; right: -2.5rem; top: -2.5rem; }
+    .ctile.fb b { padding-top: 2.5rem; }
     .ctile.fb::after { display: none; }
-    .inits-head, .team-head { grid-template-columns: 1fr; }
+    .ideas-head, .team-head { grid-template-columns: 1fr; }
+    .ideas { grid-template-columns: 1fr; }
+    .tiles { grid-template-columns: 1fr; }
+    .idea p { padding-right: 3.2rem; }
+    .idea { min-height: 0; }
+    .idea p { padding-top: 1.4rem; }
+    .idea-cta { grid-template-columns: 1fr; }
+    .idea-cta .btn { justify-self: start; }
     .team { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
-    .init-own { padding: 1.3rem; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -530,7 +553,7 @@
   <nav class="nav" aria-label="Розділи сайту">
     <a href="#pro">Про нас</a>
     <a href="#licei">Де ми</a>
-    <a href="#initsiatyvy">Ініціативи</a>
+    <a href="#initsiatyvy">Ідеї</a>
     <a href="#komanda">Команда</a>
     <a href="#pravyla">Правила</a>
     <a href="#ankety">Анкети</a>
@@ -577,8 +600,8 @@
 
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span>ідеї</span><span>✶</span><span>справи для громади</span><span>✶</span><span>події</span><span>✶</span><span>команда</span><span>✶</span><span>свої люди</span><span>✶</span><span>після уроків</span><span>✶</span>
-    <span>ідеї</span><span>✶</span><span>справи для громади</span><span>✶</span><span>події</span><span>✶</span><span>команда</span><span>✶</span><span>свої люди</span><span>✶</span><span>після уроків</span><span>✶</span>
+    <span>ідеї</span><span>✶</span><span>ідеї для громади</span><span>✶</span><span>події</span><span>✶</span><span>команда</span><span>✶</span><span>свої люди</span><span>✶</span><span>після уроків</span><span>✶</span>
+    <span>ідеї</span><span>✶</span><span>ідеї для громади</span><span>✶</span><span>події</span><span>✶</span><span>команда</span><span>✶</span><span>свої люди</span><span>✶</span><span>після уроків</span><span>✶</span>
   </div>
 </div>
 
@@ -641,14 +664,25 @@
 
   <section class="block" id="initsiatyvy" data-theme="cobalt">
     <div class="wrap">
-      <div class="inits-head">
-        <h2 data-r="wipe">Що ми зробимо для громади</h2>
-        <p data-r="up">Простір створюють не для галочки. Наша мета — щоб від нього ставало краще всій громаді: вулицям, людям поруч і самій молоді. Ось із чого ми починаємо.</p>
+      <div class="ideas-head">
+        <h2 data-r="wipe">Ідеї для громади</h2>
+        <p data-r="up">Молодіжний простір — це місце, де молодь може запропонувати, що хотілося б змінити у своїй громаді, і обговорити це разом. Кожну ідею ми уважно читаємо і разом думаємо, як до неї підступитися.</p>
       </div>
-      <div class="inits" id="inits"></div>
-      <div class="init-own" data-r="up">
-        <p>Список ініціатив відкритий. Знаєте, що варто змінити у громаді? Запропонуйте, і ми візьмемося за це разом.</p>
-        <a class="btn" href="anketa.html?f=propozytsiia">Запропонувати ініціативу</a>
+      <h3 class="ideas-sub" data-r="up">Про що можна подумати</h3>
+      <ul class="ideas">
+        <li data-r="deal" style="--d:0.00s"><div class="idea"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z"/><path d="M5 19l7-7"/></svg><small>Довкілля</small><p>Яке місце в громаді хочеться зробити чистішим і затишнішим?</p></div></li>
+        <li data-r="deal" style="--d:0.10s"><div class="idea"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><small>Добрі справи</small><p>Кому поруч може знадобитися допомога і якою вона може бути?</p></div></li>
+        <li data-r="deal" style="--d:0.20s"><div class="idea"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg><small>Події</small><p>Яке свято, турнір чи зустріч хотілося б побачити у громаді?</p></div></li>
+        <li data-r="deal" style="--d:0.00s"><div class="idea"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z"/></svg><small>Навчання</small><p>Чого ви можете навчити інших або чого хочете навчитися самі?</p></div></li>
+        <li data-r="deal" style="--d:0.10s"><div class="idea"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4h3l5 4V6L7 10z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg><small>Голос молоді</small><p>Що найбільше хвилює молодь нашої громади?</p></div></li>
+        <li data-r="deal" style="--d:0.20s"><div class="idea"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.5"/><path d="M8.5 7l1.5-3h4l1.5 3"/></svg><small>Історія громади</small><p>Про яких людей і які місця громади варто розповісти більше?</p></div></li>
+      </ul>
+      <div class="idea-cta" data-r="up">
+        <div>
+          <h3>Маєте ідею? Розкажіть про неї</h3>
+          <p>Напишіть кілька речень у короткій анкеті: що саме пропонуєте і чому це важливо.<span class="note">Анкета ні до чого не зобов'язує. Просто поділіться думкою.</span></p>
+        </div>
+        <a class="btn" href="anketa.html?f=propozytsiia">Запропонувати ідею</a>
       </div>
     </div>
   </section>
@@ -700,7 +734,7 @@
 
   <section class="block" id="yak" data-theme="sun">
     <div class="wrap">
-      <h2 data-r="wipe">Як ваша відповідь стає справою</h2>
+      <h2 data-r="wipe">Що відбувається з вашою відповіддю</h2>
       <div class="steps" id="steps">
         <div class="track" aria-hidden="true"><div class="fill"></div></div>
         <div class="step" data-r="up">
@@ -711,12 +745,12 @@
         <div class="step" data-r="up" style="--d:.15s">
           <span class="num" aria-hidden="true">2</span>
           <h3>Ми читаємо відповіді</h3>
-          <p>Команда простору збирає ідеї та шукає, що хвилює більшість.</p>
+          <p>Команда простору уважно читає кожну відповідь і дивиться, що хвилює більшість.</p>
         </div>
         <div class="step" data-r="up" style="--d:.3s">
           <span class="num" aria-hidden="true">3</span>
-          <h3>Простір змінюється</h3>
-          <p>Пропозиції стають подіями, а про результат ми розповідаємо у Facebook.</p>
+          <h3>Обговорюємо разом</h3>
+          <p>Найцікавіші ідеї обговорюємо з молоддю, а новини простору публікуємо у Facebook.</p>
         </div>
       </div>
     </div>
@@ -874,6 +908,7 @@
       wrap.setAttribute("data-r", "deal");
       wrap.style.setProperty("--d", (i % 3) * 0.12 + "s");
       var card = el("article", "card" + (item.closed ? " closed" : ""));
+      card.appendChild(el("div", "tag-n", "Анкета " + String(i + 1).padStart(2, "0")));
       card.appendChild(el("h3", "", a.nazva));
       if (a.opys) card.appendChild(el("p", "", a.opys));
       var when = "";
@@ -918,42 +953,7 @@
       document.getElementById("where-actions").appendChild(mp);
     }
 
-    /* ----- Ініціативи ----- */
-    var ICO = {
-      eco: '<path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z"/><path d="M5 19l7-7"/>',
-      heart: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
-      star: '<path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/>',
-      book: '<path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z"/>',
-      voice: '<path d="M4 10v4h3l5 4V6L7 10z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M18.5 6.5a7.5 7.5 0 0 1 0 11"/>',
-      camera: '<rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.5"/><path d="M8.5 7l1.5-3h4l1.5 3"/>'
-    };
-    var ST = { planuiemo: ["Плануємо", ""], tryvaie: ["Уже робимо", "go"], zrobleno: ["Зроблено", "ok"] };
     var cols = ["var(--sun)", "var(--mint)", "var(--pink)"];
-    var inits = document.getElementById("inits");
-    (D.initsiatyvy || []).filter(function (x) { return x && x.nazva; }).forEach(function (x, i) {
-      var w = el("div"); w.setAttribute("data-r", "deal"); w.style.setProperty("--d", (i % 3) * 0.12 + "s");
-      var c = el("article", "init"); c.style.setProperty("--c", cols[i % 3]);
-      if (x.foto) {
-        c.classList.add("has-pic");
-        var pic = el("div", "pic"), im = el("img");
-        im.src = x.foto; im.alt = x.nazva; im.loading = "lazy";
-        pic.appendChild(im); c.appendChild(pic);
-      }
-      c.appendChild(el("span", "n", String(i + 1).padStart(2, "0")));
-      if (ICO[x.ikonka]) {
-        var ns = "http://www.w3.org/2000/svg", sv = document.createElementNS(ns, "svg");
-        sv.setAttribute("viewBox", "0 0 24 24"); sv.setAttribute("class", "ico"); sv.setAttribute("aria-hidden", "true");
-        sv.setAttribute("fill", "none"); sv.setAttribute("stroke", "currentColor"); sv.setAttribute("stroke-width", "1.8");
-        sv.setAttribute("stroke-linecap", "round"); sv.setAttribute("stroke-linejoin", "round");
-        sv.innerHTML = ICO[x.ikonka];
-        c.appendChild(sv);
-      }
-      c.appendChild(el("h3", "", x.nazva));
-      if (x.opys) c.appendChild(el("p", "", x.opys));
-      var st = ST[x.status] || ST.planuiemo;
-      c.appendChild(el("span", "st " + st[1], st[0]));
-      w.appendChild(c); inits.appendChild(w);
-    });
 
     /* ----- Команда ----- */
     var team = document.getElementById("team");
@@ -994,7 +994,23 @@
   };
   var small = function (label, value, href, ext, note) { tile(colors[ci++ % colors.length], label, value, href, ext, note); };
   if (isLink(D.facebook)) tile("fb", "Facebook", "Наша сторінка у Facebook", D.facebook.trim(), true, "Анонси, фото з подій і найшвидша відповідь на ваше повідомлення.", "Відкрити сторінку");
-  if (D.email) small("Пошта", D.email, "mailto:" + D.email, false, "Для листів і пропозицій.");
+  if (D.email) {
+    var mw = el("div", ""); mw.setAttribute("data-r", "deal"); mw.style.setProperty("--d", (ct.children.length % 3) * 0.1 + "s");
+    var mt = el("div", "ctile " + colors[ci++ % colors.length]);
+    mt.appendChild(el("small", "", "Пошта"));
+    var ma = el("a", "mail-a"); ma.href = "mailto:" + D.email; ma.style.color = "inherit"; ma.style.textDecoration = "none";
+    var mb = el("b", "mail"); var at = D.email.indexOf("@");
+    if (at > 0) { mb.appendChild(document.createTextNode(D.email.slice(0, at + 1))); mb.appendChild(document.createElement("wbr")); mb.appendChild(document.createTextNode(D.email.slice(at + 1))); }
+    else mb.textContent = D.email;
+    ma.appendChild(mb); mt.appendChild(ma);
+    var row = el("div", "row"); row.appendChild(el("span", "", "Для листів і пропозицій."));
+    if (navigator.clipboard) {
+      var cp = el("button", "copy", "Скопіювати"); cp.type = "button";
+      cp.addEventListener("click", function () { navigator.clipboard.writeText(D.email).then(function () { cp.textContent = "Скопійовано ✓"; setTimeout(function () { cp.textContent = "Скопіювати"; }, 1800); }); });
+      row.appendChild(cp);
+    }
+    mt.appendChild(row); mw.appendChild(mt); ct.appendChild(mw);
+  }
   if (D.telefon) small("Телефон", D.telefon, "tel:" + D.telefon.replace(/[^\d+]/g, ""), false, "");
   if (isLink(D.instagram)) small("Instagram", "Ми в Instagram", D.instagram.trim(), true, "");
   if (isLink(D.telegram)) small("Telegram", "Канал у Telegram", D.telegram.trim(), true, "");
