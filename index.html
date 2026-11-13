@@ -246,6 +246,11 @@
   .can .i2 { border-radius: 6px; }
   .can .i3 { border-radius: 50% 50% 0 50%; }
   .can h3 { font-size: clamp(1.15rem, 2.2vw, 1.7rem); font-weight: 700; }
+  .can li { cursor: pointer; }
+  .can h3 a { color: inherit; text-decoration: none; }
+  .can h3 a::after { content: ""; position: absolute; inset: 0; }
+  .can h3 a:focus-visible { outline: none; }
+  .can li:focus-within { outline: 3px solid var(--pink); outline-offset: -3px; }
   .can p { margin: 0; max-width: 46ch; }
 
   /* ---------- Як це працює ---------- */
@@ -522,18 +527,18 @@
       <ul class="can">
         <li style="--c:var(--sun)" data-r="left">
           <span class="ico i1" aria-hidden="true"></span>
-          <h3>Сказати, що думаєш</h3>
-          <p>Пройдіть анкету. Відповіді впливають на те, які події та гуртки з'являться.</p>
+          <h3><a href="#vidhuky">Сказати, що думаєш</a></h3>
+          <p>Залиште відгук, пораду чи побажання. Його прочитає команда простору.</p>
         </li>
         <li style="--c:var(--mint); --d:.1s" data-r="left">
           <span class="ico i2" aria-hidden="true"></span>
-          <h3>Запропонувати своє</h3>
-          <p>Маєте ідею заходу, зустрічі чи проєкту? Напишіть нам, і ми допоможемо її втілити.</p>
+          <h3><a href="anketa.html?f=propozytsiia">Запропонувати своє</a></h3>
+          <p>Маєте ідею заходу, зустрічі чи проєкту? Заповніть коротку анкету пропозиції.</p>
         </li>
         <li style="--c:var(--pink); --d:.2s" data-r="left">
           <span class="ico i3" aria-hidden="true"></span>
-          <h3>Долучитися</h3>
-          <p>Слідкуйте за анонсами у Facebook і приходьте на те, що вам цікаво.</p>
+          <h3><a href="anketa.html?f=reyestratsiia">Долучитися</a></h3>
+          <p>Заповніть реєстраційну анкету учасника і приходьте на події простору.</p>
         </li>
       </ul>
     </div>
