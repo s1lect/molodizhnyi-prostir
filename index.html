@@ -646,7 +646,7 @@
         <label class="hp" aria-hidden="true">Не заповнюйте це поле<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
         <button class="btn" type="submit" id="fb-send">Надіслати</button>
         <p class="fb-status" id="fb-status" role="status" aria-live="polite"></p>
-        <p class="fb-note">Повідомлення надходить на електронну пошту команди простору через сервіс FormSubmit.</p>
+        <p class="fb-note">Повідомлення отримує лише команда простору.</p>
       </form>
     </div>
   </section>
@@ -845,7 +845,24 @@
   var status = document.getElementById("fb-status");
   var mail = (D.email || "").trim();
   var mailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail);
-  if (!mailOk) {
+  var table = (D.tablytsia || "").trim();
+  var tableOk = /^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(table);
+  // Якщо в dani.js вказано адресу таблиці, відповідь записується в Google Таблицю, інакше йде листом через FormSubmit.
+  function deliver(forma, data, polia) {
+    if (tableOk) {
+      return fetch(table, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ forma: forma, tema: data._subject, polia: polia })
+      }).then(function (r) { return r.json(); }).then(function (j) { return { success: !!(j && j.ok === true), message: (j && j.message) || "" }; });
+    }
+    return fetch("https://formsubmit.co/ajax/" + encodeURI(mail), {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(data)
+    }).then(function (r) { return r.json(); });
+  }
+  if (!mailOk && !tableOk) {
     send.disabled = true;
     status.textContent = "Форма запрацює, щойно ми додамо електронну адресу. Поки що напишіть нам у Facebook.";
   }
@@ -867,7 +884,7 @@
   }
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    if (!mailOk || form._honey.value) return;
+    if ((!mailOk && !tableOk) || form._honey.value) return;
     var text = form.tekst.value.trim();
     if (text.length < 5) { status.textContent = "Напишіть, будь ласка, хоча б кілька слів."; form.tekst.focus(); return; }
     var data = {
@@ -879,11 +896,7 @@
       "Контакт": form.kontakt.value.trim() || "не вказано"
     };
     send.disabled = true; status.textContent = "Надсилаємо…";
-    fetch("https://formsubmit.co/ajax/" + encodeURI(mail), {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify(data)
-    }).then(function (r) { return r.json(); }).then(function (j) {
+    deliver("vidhuk", data, [["Тип", form.typ.value], ["Повідомлення", text], ["Ім'я", form.imia.value.trim()], ["Контакт", form.kontakt.value.trim()]]).then(function (j) {
       if (!(j && (j.success === true || j.success === "true"))) { var er = new Error("fail"); er.info = (j && j.message) || ""; throw er; }
       status.textContent = "Надіслано. Дякуємо, що не промовчали!";
       form.reset(); confetti();
