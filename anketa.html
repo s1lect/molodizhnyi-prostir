@@ -111,6 +111,21 @@
   .status { margin: 1rem 0 0; font-weight: 500; min-height: 1.5em; }
   .note { margin: 1.5rem 0 0; font-size: .9rem; color: #4A5389; max-width: 56ch; }
   .hp { position: absolute; left: -9999px; }
+.docs { display: grid; gap: .6rem; }
+.doc-link { display: flex; align-items: center; gap: .9rem; padding: .9rem 1.2rem; border: 2px solid var(--ink); border-radius: 14px; background: #fff; text-decoration: none; font-weight: 600; transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+.doc-link:hover { transform: translate(-3px, -3px); box-shadow: 6px 6px 0 var(--cobalt); }
+.doc-link b { flex: none; font-size: .78rem; font-weight: 700; letter-spacing: .04em; color: #fff; background: var(--cobalt); border-radius: 6px; padding: .25rem .5rem; }
+.doc-link small { display: block; font-weight: 400; font-size: .88rem; color: #4A5389; }
+.file { display: block; position: relative; cursor: pointer; padding: 1rem 1.2rem; border: 2px dashed var(--ink); border-radius: 14px; background: #fff; transition: border-color .3s ease, background-color .3s ease; }
+.file:hover { border-color: var(--cobalt); }
+.file input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.file:focus-within { outline: 3px solid var(--pink); outline-offset: 3px; }
+.file .pick-txt { font-weight: 600; color: var(--cobalt); }
+.file .names { display: block; margin-top: .3rem; font-size: .92rem; color: #4A5389; word-break: break-word; }
+.file.has { border-style: solid; border-color: var(--cobalt); background: #F3F5FF; }
+.f.bad .file { border-color: #C2184B; }
+html.calm .doc-link small, html.calm .file .names { color: #7A655C; }
+html.calm .file.has { background: #FFF8EF; }
 
   .done-screen, .pick { display: none; max-width: 40rem; }
   .done-screen.on, .pick.on { display: block; animation: in-right .7s var(--ease) both; }
@@ -226,10 +241,16 @@
           { name: "vik", label: "Вікова категорія", type: "radio", req: true, options: ["14–17 років", "18–24 роки", "25–29 років", "30–35 років"] }
         ] },
         { title: "Для учасників до 18 років", when: function (v) { return v.vik === "14–17 років"; },
-          hint: "Участь неповнолітніх і використання їхніх зображень погоджуються з одним із батьків або законним представником. Вкажіть його контакти.", fields: [
+          hint: "Для учасників до 18 років потрібні дві згоди, підписані одним із батьків або законним представником. Завантажте бланки, роздрукуйте, заповніть і підпишіть, а потім прикріпіть фото або скан кожної згоди.", fields: [
           { name: "batky_pib", label: "Прізвище, ім'я та по батькові одного з батьків або законного представника", type: "text", req: true },
           { name: "batky_telefon", label: "Номер телефону одного з батьків або законного представника", type: "tel", req: true },
-          { name: "batky_zhoda", label: "Погодження участі", type: "consent", req: true, text: "Мої батьки або законний представник знають про цю анкету і погоджуються на мою участь у молодіжному просторі." }
+          { name: "blanky", label: "Бланки згод", type: "docs", help: "Натисніть, щоб завантажити. Заповнює і підписує один із батьків або законний представник.", items: [
+{ href: "dokumenty/zghoda-personalni-dani.docx", title: "Згода на обробку персональних даних", note: "Документ Word (.docx)" },
+{ href: "dokumenty/zghoda-foto-video.docx", title: "Згода на фото- та відеозйомку", note: "Документ Word (.docx)" }
+] },
+{ name: "fail_dani", label: "Підписана згода на обробку персональних даних", type: "file", req: true, help: "Фото, скан або PDF. Якщо сторінок кілька, оберіть усі файли разом." },
+{ name: "fail_foto", label: "Підписана згода на фото- та відеозйомку", type: "file", req: true, help: "Фото, скан або PDF. Якщо сторінок кілька, оберіть усі файли разом." },
+{ name: "batky_zhoda", label: "Погодження участі", type: "consent", req: true, text: "Мої батьки або законний представник знають про цю анкету і погоджуються на мою участь у молодіжному просторі." }
         ] },
         { title: "Навчання або робота", hint: "Це допоможе планувати події у зручний для вас час.", fields: [
           { name: "status", label: "Ваш статус", type: "radio", req: true, other: true, options: ["Учень/учениця", "Студент/студентка", "Працюю", "Тимчасово не навчаюся і не працюю"] },
@@ -318,7 +339,7 @@
     box.style.setProperty("--n", n);
     box.dataset.name = f.name;
     var lab = el(group ? "legend" : "label", "", f.label);
-    if (!group && f.type !== "consent") lab.htmlFor = id;
+    if (!group && f.type !== "consent" && f.type !== "docs") lab.htmlFor = id;
     if (f.req) { var star = el("span", "req", " *"); star.setAttribute("aria-hidden", "true"); lab.appendChild(star); }
     if (f.help) lab.appendChild(el("span", "help", f.help));
     if (f.type !== "consent") box.appendChild(lab);
@@ -350,7 +371,28 @@
           ot.hidden = !on; if (on) ot.focus();
         });
       }
-    } else if (f.type === "consent") {
+    } else if (f.type === "file") {
+var fl = el("label", "file"); var fi = el("input");
+fi.type = "file"; fi.id = id; fi.name = f.name; fi.multiple = true; fi.accept = "image/*,.pdf,.doc,.docx";
+if (f.req) fi.setAttribute("aria-required", "true");
+var pt = el("span", "pick-txt", "Обрати файл"); var nm = el("span", "names", "Файл ще не обрано");
+fl.appendChild(fi); fl.appendChild(pt); fl.appendChild(nm); box.appendChild(fl);
+fi.addEventListener("change", function () {
+var names = Array.prototype.map.call(fi.files, function (x) { return x.name; });
+fl.classList.toggle("has", names.length > 0);
+pt.textContent = names.length ? "Замінити файл" : "Обрати файл";
+nm.textContent = names.length ? names.join(", ") : "Файл ще не обрано";
+});
+} else if (f.type === "docs") {
+var dl = el("div", "docs");
+f.items.forEach(function (it) {
+var a = el("a", "doc-link"); a.href = it.href; a.setAttribute("download", "");
+a.appendChild(el("b", "", "DOCX"));
+var sp = el("span", "", it.title); sp.appendChild(el("small", "", it.note)); a.appendChild(sp);
+dl.appendChild(a);
+});
+box.appendChild(dl);
+} else if (f.type === "consent") {
       var head = el("div", "", f.label); head.style.fontWeight = "600"; head.style.marginBottom = ".5rem";
       if (f.req) { var st = el("span", "req", " *"); st.setAttribute("aria-hidden", "true"); head.appendChild(st); }
       box.appendChild(head);
@@ -374,6 +416,8 @@
 
   /* ----- Читання відповідей ----- */
   function valueOf(f) {
+if (f.type === "docs") return "";
+if (f.type === "file") return Array.prototype.map.call(form[f.name].files, function (x) { return x.name; }).join(", ");
     if (f.type === "radio") {
       var r = form.querySelector('input[name="' + f.name + '"]:checked');
       if (!r) return "";
@@ -395,10 +439,12 @@
     step.fields.forEach(function (f) {
       var box = step.node.querySelector('[data-name="' + f.name + '"]');
       var val = valueOf(f), msg = "";
-      if (f.req && !val) msg = f.type === "consent" ? "Без цієї згоди ми не можемо прийняти анкету." : (f.type === "radio" || f.type === "checks") ? "Оберіть варіант." : "Заповніть це поле.";
+      if (f.req && !val) msg = f.type === "file" ? "Прикріпіть фото або скан підписаної згоди." : f.type === "consent" ? "Без цієї згоди ми не можемо прийняти анкету." : (f.type === "radio" || f.type === "checks") ? "Оберіть варіант." : "Заповніть це поле.";
       else if (val && f.type === "email" && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val)) msg = "Перевірте адресу: у ній має бути знак @ і крапка.";
       else if (val && f.type === "tel" && !/^\+?[0-9][0-9 ()\-]{8,17}$/.test(val)) msg = "Вкажіть номер цифрами, наприклад +380 67 123 45 67.";
-      else if (/Інше: (;|$)/.test(val + ";")) msg = "Уточніть свій варіант у полі «Інше».";
+      else if (f.type === "file" && Array.prototype.some.call(form[f.name].files, function (x) { return !/^image\/|pdf|word|officedocument/.test(x.type) && !/\.(jpe?g|png|heic|heif|webp|pdf|docx?)$/i.test(x.name); })) msg = "Прикріпіть фото, скан або PDF.";
+else if (f.type === "file" && filesSize() > LIMIT) msg = "Файли завеликі: разом вони мають бути до 10 МБ. Зменште фото або зробіть один PDF.";
+else if (/Інше: (;|$)/.test(val + ";")) msg = "Уточніть свій варіант у полі «Інше».";
       box.classList.toggle("bad", !!msg);
       box.querySelector(".err").textContent = msg;
       if (msg && !first) first = box;
@@ -429,6 +475,13 @@
     if (dir) { step.node.querySelector("h2").focus({ preventScroll: true }); document.querySelector(".main").scrollIntoView({ behavior: calm() ? "auto" : "smooth", block: "start" }); }
   }
   show(cur, 0);
+if (new URLSearchParams(location.search).get("nadislano") === "1") {
+document.getElementById("wizard").hidden = true;
+document.getElementById("done-text").textContent = F.done;
+document.getElementById("done").classList.add("on");
+F.steps.forEach(function (s) { s.dot.classList.remove("now"); if (!s.dot.hidden) s.dot.classList.add("done"); });
+try { history.replaceState(null, "", location.pathname + "?f=" + key); } catch (e) {}
+}
 
   back.addEventListener("click", function () { var a = active(), i = a.indexOf(cur); if (i > 0) show(a[i - 1], -1); });
 
@@ -455,7 +508,25 @@
   var table = (D.tablytsia || "").trim();
   var tableOk = /^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(table);
   // Якщо в dani.js вказано адресу таблиці, відповідь записується в Google Таблицю, інакше йде листом через FormSubmit.
-  function deliver(forma, data, polia) {
+  var LIMIT = 10 * 1024 * 1024;
+function fileFields() { var out = []; active().forEach(function (s) { s.fields.forEach(function (f) { if (f.type === "file") out.push(f); }); }); return out; }
+function filesSize() { var t = 0; fileFields().forEach(function (f) { Array.prototype.forEach.call(form[f.name].files, function (x) { t += x.size; }); }); return t; }
+// Анкету з файлами браузер надсилає як звичайну форму, після чого FormSubmit повертає людину назад на цю сторінку.
+function sendWithFiles(data, ff) {
+var hf = document.createElement("form");
+hf.method = "POST"; hf.enctype = "multipart/form-data"; hf.hidden = true;
+hf.action = "https://formsubmit.co/" + encodeURI(mail);
+data._next = location.origin + location.pathname + "?f=" + key + "&nadislano=1";
+Object.keys(data).forEach(function (k) { var i = document.createElement("input"); i.type = "hidden"; i.name = k; i.value = data[k]; hf.appendChild(i); });
+ff.forEach(function (f) {
+var dt = new DataTransfer();
+Array.prototype.forEach.call(form[f.name].files, function (x) { dt.items.add(x); });
+var i = document.createElement("input"); i.type = "file"; i.name = "Файл: " + f.label; i.multiple = true; i.files = dt.files; hf.appendChild(i);
+});
+document.body.appendChild(hf);
+hf.submit();
+}
+function deliver(forma, data, polia) {
     if (tableOk) {
       return fetch(table, {
         method: "POST",
@@ -478,10 +549,19 @@
     if (!mailOk && !tableOk) { status.textContent = "Анкета тимчасово не приймає відповіді. Напишіть нам у Facebook."; return; }
     var v = values();
     var data = { _subject: F.subject(v), _template: "table", _captcha: "false" };
-    act.forEach(function (s) { s.fields.forEach(function (f) { data[f.label] = v[f.name] || "не вказано"; }); });
+    act.forEach(function (s) { s.fields.forEach(function (f) { if (f.type !== "docs") data[f.label] = v[f.name] || "не вказано"; }); });
     next.disabled = true; status.textContent = "Надсилаємо…";
+var ff = fileFields();
+if (ff.length) {
+if (!mailOk) { next.disabled = false; status.textContent = "Анкета з файлами тимчасово не приймається. Напишіть нам у Facebook."; return; }
+if (filesSize() > LIMIT) { next.disabled = false; status.textContent = "Файли разом мають бути до 10 МБ. Зменште фото або зробіть один PDF."; return; }
+status.textContent = "Надсилаємо анкету і файли… Це може тривати до хвилини.";
+if (tableOk) { var pp = []; F.steps.forEach(function (st) { var on = act.indexOf(st) > -1; st.fields.forEach(function (f) { if (f.type !== "docs") pp.push([f.label, on ? v[f.name] : ""]); }); }); fetch(table, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ forma: key, tema: data._subject, polia: pp }), keepalive: true }).catch(function () {}); }
+sendWithFiles(data, ff);
+return;
+}
     var polia = [];
-    F.steps.forEach(function (st) { var on = act.indexOf(st) > -1; st.fields.forEach(function (f) { polia.push([f.label, on ? v[f.name] : ""]); }); });
+    F.steps.forEach(function (st) { var on = act.indexOf(st) > -1; st.fields.forEach(function (f) { if (f.type !== "docs") polia.push([f.label, on ? v[f.name] : ""]); }); });
     deliver(key, data, polia).then(function (j) {
       if (!(j && (j.success === true || j.success === "true"))) { var er = new Error("fail"); er.info = (j && j.message) || ""; throw er; }
       document.getElementById("wizard").hidden = true;
