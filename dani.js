@@ -9,8 +9,8 @@ window.DANI = {
 
   // ---------- КОНТАКТИ ----------
   facebook: "https://www.facebook.com/profile.php?id=61596745940322",
-  instagram: "",          // наприклад "https://www.instagram.com/nazva"
-  telegram: "",           // наприклад "https://t.me/nazva"
+  instagram: "https://www.instagram.com/povirusebe.space/",          // наприклад "https://www.instagram.com/nazva"
+  telegram: "https://t.me/+IeMlbKg1EtYzOGIy",           // наприклад "https://t.me/nazva"
   telefon: "",            // наприклад "+380 00 000 00 00"
   email: "povirusebe.space@gmail.com",              // на цю адресу надходитимуть відгуки з форми, наприклад "prostir@example.com"
   adresa: "",             // наприклад "вул. Шкільна, 1, с. Степанівка"
