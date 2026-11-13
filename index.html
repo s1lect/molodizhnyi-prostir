@@ -84,7 +84,7 @@
   }
   .calm-btn i { position: relative; width: 2.6rem; height: 1.55rem; border-radius: 999px; background: linear-gradient(90deg, var(--pink), var(--sun), var(--mint)); transition: background-color .3s ease; }
   .calm-btn i::after { content: ""; position: absolute; top: .2rem; left: .2rem; width: 1.15rem; height: 1.15rem; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(27, 37, 89, .35); transition: transform .35s var(--ease); }
-  .calm-btn[aria-pressed="true"] i { background: #777; }
+  .calm-btn[aria-pressed="true"] i { background: #B5654F; }
   .calm-btn[aria-pressed="true"] i::after { transform: translateX(1.05rem); }
   .nav {
     max-width: 100%; overflow-x: auto; scrollbar-width: none;
@@ -290,13 +290,25 @@
   .empty { padding: 2rem; border: 2px dashed #9AA1C4; border-radius: 8px; max-width: 44rem; }
 
   /* ---------- Контакти ---------- */
-  .contacts .lead { max-width: 46ch; color: inherit; margin: 1.2rem 0 2rem; }
-  .contacts dl { margin: 0; }
-  .contacts .row { padding: 1.2rem 0; border-top: 1px solid rgba(27, 37, 89, .22); display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; }
-  .contacts dt { color: #4A5389; }
-  .contacts dd { margin: 0; font-weight: 500; overflow-wrap: anywhere; }
-  .contacts dd a { text-decoration: none; background: linear-gradient(var(--sun), var(--sun)) 0 100% / 100% 2px no-repeat; transition: background-size .4s var(--ease), color .3s ease; padding-bottom: .15em; }
-  .contacts dd a:hover { background-size: 100% 100%; color: var(--ink); }
+  .contacts .lead { max-width: 46ch; color: inherit; margin: 1.2rem 0 3rem; }
+  .ctiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+  .ctiles .wide { grid-column: span 2; grid-row: span 2; }
+  .ctile { position: relative; overflow: hidden; isolation: isolate; display: flex; flex-direction: column; height: 100%; min-height: 9.5rem; padding: 1.6rem; border-radius: 8px 34px 8px 8px; background: var(--paper); color: var(--ink); text-decoration: none; transition: transform .45s var(--ease), box-shadow .45s ease; }
+  a.ctile:hover { transform: translateY(-8px) rotate(-1deg); box-shadow: 0 26px 40px -20px rgba(27, 37, 89, .5); }
+  .ctile small { font-size: .9rem; font-weight: 600; }
+  .ctile b { font-family: var(--display); font-weight: 700; font-size: 1.05rem; line-height: 1.25; margin-top: auto; padding-top: 1.2rem; overflow-wrap: anywhere; }
+  .ctile span { margin-top: .5rem; font-size: .95rem; }
+  .ctile.c1 { background: var(--sun); }
+  .ctile.c2 { background: var(--mint); }
+  .ctile.c3 { background: var(--pink); }
+  .ctile.fb { background: var(--cobalt); color: #fff; min-height: 20rem; }
+  .ctile.fb b { font-size: clamp(1.5rem, 3.2vw, 2.6rem); font-weight: 900; max-width: 12ch; }
+  .ctile.fb span { max-width: 38ch; }
+  .ctile.fb::before { content: ""; position: absolute; z-index: -1; right: -5rem; top: -5rem; width: 17rem; height: 17rem; border-radius: 50%; background: var(--sun); transition: transform .8s var(--ease); }
+  .ctile.fb::after { content: ""; position: absolute; z-index: -1; right: 9rem; top: 5.5rem; width: 4.5rem; height: 2.25rem; border-radius: 999px 999px 0 0; background: var(--mint); transition: transform .8s var(--ease); }
+  .ctile.fb:hover::before { transform: scale(1.25); }
+  .ctile.fb:hover::after { transform: rotate(160deg) translateY(1rem); }
+  .ctile .go { align-self: flex-start; margin-top: 1.2rem; padding: .7rem 1.3rem; border-radius: 999px; background: var(--sun); color: var(--ink); font-weight: 600; font-size: 1rem; }
 
   footer { padding: 1rem 0 2.5rem; color: #4A5389; font-size: .95rem; overflow: hidden; }
   .giant { display: flex; width: max-content; animation: slide 40s linear infinite; margin-bottom: 2rem; }
@@ -317,6 +329,15 @@
   .ph:hover img { filter: none; }
   .ph:hover::after { opacity: 0; }
   .ph-note { margin: 1rem 0 0; font-size: .95rem; }
+  .lic { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 3rem 5rem; align-items: center; }
+  .lic p { max-width: 46ch; }
+  .ph-stage { position: relative; max-width: 36rem; padding: 0 2.5rem 2.5rem 0; }
+  .ph-stage .ph { max-width: none; box-shadow: 0 30px 50px -28px rgba(27, 37, 89, .55); }
+  .ph-back { position: absolute; inset: 3rem 0 0 3rem; border-radius: 999px 999px 14px 14px; background: var(--sun); }
+  .ph-star { position: absolute; top: -1.2rem; right: 4.5rem; width: clamp(3rem, 6vw, 5rem); color: var(--pink); animation: spin 16s linear infinite; }
+  .ph-ring { position: absolute; left: -1.8rem; bottom: .6rem; width: clamp(6.5rem, 11vw, 9rem); aspect-ratio: 1; border-radius: 50%; background: var(--cobalt); }
+  .ph-ring svg { width: 100%; height: 100%; animation: spin 20s linear infinite; }
+  .ph-ring text { font-family: var(--body); font-size: 10.5px; font-weight: 500; letter-spacing: .14em; fill: #fff; }
 
   /* ---------- Засади, правила, документи ---------- */
   .lead-w { max-width: 60ch; margin: 1.2rem 0 0; }
@@ -367,7 +388,18 @@
   .bit { position: fixed; z-index: 95; width: .7rem; height: .7rem; border-radius: 2px; pointer-events: none; }
 
   /* ---------- Спокійний режим ---------- */
-  html.calm { filter: grayscale(1); }
+  html.calm { --chalk: #FBF4EA; --ink: #4A3A35; --cobalt: #F8DCC8; --sun: #F5CD8B; --mint: #CBE0CC; --pink: #E59A8F; --paper: #FFFAF3; --clay: #B5654F; --rose: #F9E1DA; --sand: #F1DFCF; }
+  html.calm body, html.calm body[data-theme] { --fg: var(--ink); }
+  html.calm .title .w2, html.calm .hero-foot p strong { color: var(--clay); }
+  html.calm .link-btn:hover { color: var(--clay); }
+  html.calm .tile { border-color: rgba(74, 58, 53, .18); background: rgba(255, 255, 255, .6); }
+  html.calm .rules li { border-top-color: rgba(74, 58, 53, .2); }
+  html.calm .rules circle { fill: var(--sun); }
+  html.calm .rules path { stroke: var(--ink); }
+  html.calm .contacts dt, html.calm footer { color: #7A655C; }
+  html.calm .giant span { -webkit-text-stroke-color: #D2B29C; }
+  html.calm .ctile.fb, html.calm .ph-ring { background: var(--clay); }
+  html.calm .calm-btn i { background: var(--clay); }
   html.calm *, html.calm *::before, html.calm *::after { animation: none !important; transition: none !important; }
   html.calm [data-r], html.calm .title .ch, html.calm .hero-foot > *, html.calm .shape > * { opacity: 1 !important; transform: none !important; clip-path: none !important; }
   html.calm .rules path { stroke-dashoffset: 0; }
@@ -375,7 +407,8 @@
 
   @media (max-width: 800px) {
     .nav, .calm-btn { font-size: .85rem; }
-    .photos { grid-template-columns: 1fr; }
+    .photos, .lic { grid-template-columns: 1fr; }
+    .ph-ring { left: -.5rem; }
     .ph2 { margin-bottom: 0; }
     .rules { grid-template-columns: 1fr; }
     .hero { padding-top: 8.5rem; }
@@ -393,7 +426,11 @@
     .track { top: 0; bottom: 0; left: .55rem; right: auto; width: 4px; height: auto; }
     .fill { transform: scaleY(var(--p, 0)); }
     .step::before { top: .2rem; left: -3rem; }
-    .contacts .row { grid-template-columns: 1fr; gap: .15rem; }
+    .ctiles { grid-template-columns: 1fr; }
+    .ctiles .wide { grid-column: auto; }
+    .ctile.fb { min-height: 17rem; }
+    .ctile.fb::before { width: 9rem; height: 9rem; right: -3rem; top: -3.5rem; }
+    .ctile.fb::after { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -425,7 +462,7 @@
     <a href="#vidhuky">Відгуки</a>
     <a href="#kontakty">Контакти</a>
   </nav>
-  <button class="calm-btn" id="calm" type="button" aria-pressed="false" title="Вимикає кольори та анімації"><i aria-hidden="true"></i>Спокійний режим</button>
+  <button class="calm-btn" id="calm" type="button" aria-pressed="false" title="Вмикає теплі спокійні кольори та вимикає анімації"><i aria-hidden="true"></i>Спокійний режим</button>
 </div>
 <div class="cursor" id="cursor" aria-hidden="true"></div>
 
@@ -503,18 +540,20 @@
   </section>
 
   <section class="block" id="licei" data-theme="paper">
-    <div class="wrap">
-      <div class="split">
-        <h2 data-r="wipe">Наш дім: Степанівський ліцей</h2>
-        <div>
-          <p data-r="up">Простір живе в стінах ліцею, який знає вся громада. Сюди ходили наші батьки, тут навчаємося ми, і саме тут тепер є місце, де після уроків можна лишитися заради власної справи.</p>
+    <div class="wrap lic">
+      <div class="ph-stage">
+        <div class="ph-back" data-r="pop" aria-hidden="true"></div>
+        <figure class="ph ph1" data-r="iris" style="--d:.15s"><img src="img/licei-1.png" alt="Триповерховий корпус Степанівського ліцею з ґанком і державним прапором біля входу" loading="lazy"></figure>
+        <svg class="ph-star" data-r="pop" style="--d:.5s" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M50 0l9 32 29-17-17 29 29 6-29 6 17 29-29-17-9 32-9-32-29 17 17-29L0 50l29-6-17-29 29 17z"/></svg>
+        <div class="ph-ring" data-r="pop" style="--d:.65s" aria-hidden="true">
+          <svg viewBox="0 0 120 120"><defs><path id="ring2" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/></defs><text><textPath href="#ring2">СТЕПАНІВСЬКИЙ ЛІЦЕЙ ✶ НАШ ДІМ ✶ </textPath></text></svg>
         </div>
       </div>
-      <div class="photos">
-        <figure class="ph ph1" data-r="iris"><img src="img/licei-1.png" alt="Триповерховий корпус Степанівського ліцею з ґанком і державним прапором біля входу" loading="lazy"></figure>
-        <figure class="ph ph2" data-r="iris" style="--d:.2s"><img src="img/licei-2.png" alt="Двоповерхова цегляна будівля ліцею з оздобленим фасадом і зубцями на даху" loading="lazy"></figure>
+      <div>
+        <h2 data-r="wipe">Наш дім: Степанівський ліцей</h2>
+        <p data-r="up" style="margin-top:1.4rem">Простір живе в стінах ліцею, який знає вся громада. Сюди ходили наші батьки, тут навчаємося ми, і саме тут тепер є місце, де після уроків можна лишитися заради власної справи.</p>
+        <p class="ph-note" data-r="up" style="--d:.1s">Наведіть на фото або торкніться його, щоб побачити в кольорі.</p>
       </div>
-      <p class="ph-note" data-r="up">Наведіть на фото або торкніться його, щоб побачити в кольорі.</p>
     </div>
   </section>
 
@@ -613,15 +652,12 @@
   </section>
 
   <section class="block contacts" id="kontakty" data-theme="ink">
-    <div class="wrap split">
-      <div>
-        <h2 data-r="wipe">Напишіть нам</h2>
-        <p class="lead" data-r="up">Найшвидше ми відповідаємо у Facebook. Там же з'являються анонси та фото з подій.</p>
-        <a class="btn" data-r="up" style="--d:.1s" href="https://www.facebook.com/profile.php?id=61596745940322" target="_blank" rel="noopener" id="fb-btn">Відкрити Facebook</a>
+    <div class="wrap">
+      <h2 data-r="wipe">Напишіть нам</h2>
+      <p class="lead" data-r="up">Найшвидше ми відповідаємо у Facebook. Там же з'являються анонси та фото з подій.</p>
+      <div class="ctiles" id="contacts">
+        <a class="ctile fb" href="https://www.facebook.com/profile.php?id=61596745940322" target="_blank" rel="noopener"><small>Facebook</small><b>Наша сторінка у Facebook</b></a>
       </div>
-      <dl id="contacts" data-r="right">
-        <div class="row"><dt>Facebook</dt><dd><a href="https://www.facebook.com/profile.php?id=61596745940322" target="_blank" rel="noopener">Сторінка простору у Facebook</a></dd></div>
-      </dl>
     </div>
   </section>
 </main>
@@ -759,24 +795,29 @@
   }
 
   /* ----- Контакти ----- */
-  var dl = document.getElementById("contacts");
-  dl.textContent = "";
-  var row = function (label, node) {
-    var r = el("div", "row");
-    r.appendChild(el("dt", "", label));
-    var dd = el("dd"); dd.appendChild(node); r.appendChild(dd);
-    dl.appendChild(r);
+  var ct = document.getElementById("contacts");
+  ct.textContent = "";
+  var colors = ["c1", "c2", "c3", ""], ci = 0;
+  var tile = function (cls, label, value, href, ext, note, go) {
+    var a = el(href ? "a" : "div", "ctile " + cls);
+    if (href) { a.href = href; if (ext) { a.target = "_blank"; a.rel = "noopener"; } }
+    a.appendChild(el("small", "", label));
+    a.appendChild(el("b", "", value));
+    if (note) a.appendChild(el("span", "", note));
+    if (go) a.appendChild(el("span", "go", go));
+    var w = el("div", cls === "fb" ? "wide" : "");
+    w.setAttribute("data-r", "deal"); w.style.setProperty("--d", (ct.children.length % 3) * 0.1 + "s");
+    w.appendChild(a); ct.appendChild(w);
   };
-  if (isLink(D.facebook)) {
-    row("Facebook", extLink(D.facebook, "Сторінка простору у Facebook"));
-    document.getElementById("fb-btn").href = D.facebook.trim();
-  }
-  if (isLink(D.instagram)) row("Instagram", extLink(D.instagram, "Ми в Instagram"));
-  if (isLink(D.telegram)) row("Telegram", extLink(D.telegram, "Канал у Telegram"));
-  if (D.telefon) { var t = el("a", "", D.telefon); t.href = "tel:" + D.telefon.replace(/[^\d+]/g, ""); row("Телефон", t); }
-  if (D.email) { var m = el("a", "", D.email); m.href = "mailto:" + D.email; row("Пошта", m); }
-  if (D.adresa) row("Адреса", el("span", "", D.adresa));
-  if (D.hodyny) row("Коли відкрито", el("span", "", D.hodyny));
+  var small = function (label, value, href, ext, note) { tile(colors[ci++ % colors.length], label, value, href, ext, note); };
+  if (isLink(D.facebook)) tile("fb", "Facebook", "Наша сторінка у Facebook", D.facebook.trim(), true, "Анонси, фото з подій і найшвидша відповідь на ваше повідомлення.", "Відкрити сторінку");
+  if (D.email) small("Пошта", D.email, "mailto:" + D.email, false, "Для листів і пропозицій.");
+  if (D.telefon) small("Телефон", D.telefon, "tel:" + D.telefon.replace(/[^\d+]/g, ""), false, "");
+  if (isLink(D.instagram)) small("Instagram", "Ми в Instagram", D.instagram.trim(), true, "");
+  if (isLink(D.telegram)) small("Telegram", "Канал у Telegram", D.telegram.trim(), true, "");
+  if (D.adresa) small("Адреса", D.adresa, "", false, "");
+  if (D.hodyny) small("Коли відкрито", D.hodyny, "", false, "");
+  small("Відгуки", "Залишити відгук на сайті", "#vidhuky", false, "Порада чи побажання дійде до команди простору.");
   document.getElementById("year").textContent = new Date().getFullYear();
 
   /* ----- Документи ----- */

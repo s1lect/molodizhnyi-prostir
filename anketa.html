@@ -40,7 +40,7 @@
   .pill:hover { background: var(--sun); }
   .pill i { position: relative; width: 2.3rem; height: 1.35rem; border-radius: 999px; background: linear-gradient(90deg, var(--pink), var(--sun), var(--mint)); }
   .pill i::after { content: ""; position: absolute; top: .17rem; left: .17rem; width: 1rem; height: 1rem; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(27, 37, 89, .35); transition: transform .35s var(--ease); }
-  .pill[aria-pressed="true"] i { background: #777; }
+  .pill[aria-pressed="true"] i { background: #B5654F; }
   .pill[aria-pressed="true"] i::after { transform: translateX(.95rem); }
   .side h1 { font-weight: 900; font-size: clamp(1.9rem, 3.4vw, 3.2rem); letter-spacing: -.02em; margin-top: auto; }
   .side h1 span { display: block; color: var(--sun); }
@@ -138,7 +138,13 @@
     .blob.b2, .blob.b3 { display: none; }
     .main { justify-content: flex-start; }
   }
-  html.calm { filter: grayscale(1); }
+  html.calm { --chalk: #FBF4EA; --ink: #4A3A35; --cobalt: #B5654F; --deep: #9C5340; --sun: #F5CD8B; --mint: #CBE0CC; --pink: #E59A8F; }
+  html.calm .side .lead { color: #FBEDE4; }
+  html.calm .dots li { color: #F3D3C6; }
+  html.calm .dots li.done { color: #fff; }
+  html.calm .dots li.now { color: var(--sun); }
+  html.calm .help, html.calm .note { color: #7A655C; }
+  html.calm .bar { background: #EBD9CB; }
   html.calm *, html.calm *::before, html.calm *::after { animation: none !important; transition: none !important; }
   html.calm .tick path { stroke-dashoffset: 0; }
   @media (prefers-reduced-motion: reduce) {
@@ -155,7 +161,7 @@
     <div class="blob b3" aria-hidden="true"></div>
     <div class="side-top">
       <a class="pill" href="index.html#ankety">На головну</a>
-      <button class="pill" id="calm" type="button" aria-pressed="false" title="Вимикає кольори та анімації"><i aria-hidden="true"></i>Спокійний режим</button>
+      <button class="pill" id="calm" type="button" aria-pressed="false" title="Вмикає теплі спокійні кольори та вимикає анімації"><i aria-hidden="true"></i>Спокійний режим</button>
     </div>
     <h1 id="f-title">Анкети <span>простору «Повір у себе»</span></h1>
     <p class="lead" id="f-lead">Оберіть анкету, яка вам потрібна.</p>
