@@ -468,15 +468,17 @@
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify(data)
     }).then(function (r) { return r.json(); }).then(function (j) {
-      if (!(j && (j.success === true || j.success === "true"))) throw new Error("fail");
+      if (!(j && (j.success === true || j.success === "true"))) { var er = new Error("fail"); er.info = (j && j.message) || ""; throw er; }
       document.getElementById("wizard").hidden = true;
       document.getElementById("done-text").textContent = F.done;
       document.getElementById("done").classList.add("on");
       F.steps.forEach(function (s) { s.dot.classList.remove("now"); if (!s.dot.hidden) s.dot.classList.add("done"); });
       confetti();
-    }).catch(function () {
+    }).catch(function (er) {
+      var info = (er && er.info) || "";
       next.disabled = false;
-      status.textContent = "Не вдалося надіслати. Перевірте інтернет і спробуйте ще раз або напишіть на " + mail + ".";
+      if (/activ/i.test(info)) { status.textContent = "Анкету ще не підтверджено. На пошту простору надійшов лист від FormSubmit: відкрийте його, натисніть «Activate Form» і надішліть анкету ще раз. Ваші відповіді збережено на цій сторінці."; return; }
+      status.textContent = "Не вдалося надіслати. " + (info ? "Відповідь сервісу: " + info + " " : "Перевірте інтернет і спробуйте ще раз. ") + "Або напишіть на " + mail + ".";
     });
   });
 })();

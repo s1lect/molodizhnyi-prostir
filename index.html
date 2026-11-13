@@ -884,11 +884,13 @@
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify(data)
     }).then(function (r) { return r.json(); }).then(function (j) {
-      if (!(j && (j.success === true || j.success === "true"))) throw new Error("fail");
+      if (!(j && (j.success === true || j.success === "true"))) { var er = new Error("fail"); er.info = (j && j.message) || ""; throw er; }
       status.textContent = "Надіслано. Дякуємо, що не промовчали!";
       form.reset(); confetti();
-    }).catch(function () {
-      status.textContent = "Не вдалося надіслати. ";
+    }).catch(function (er) {
+      var info = (er && er.info) || "";
+      if (/activ/i.test(info)) { status.textContent = "Форму ще не підтверджено. На пошту простору надійшов лист від FormSubmit: відкрийте його, натисніть «Activate Form» і надішліть повідомлення ще раз."; return; }
+      status.textContent = "Не вдалося надіслати. " + (info ? "Відповідь сервісу: " + info + " " : "");
       var a = el("a", "", "Напишіть нам листа");
       a.href = "mailto:" + mail + "?subject=" + encodeURIComponent(data._subject) + "&body=" + encodeURIComponent(text);
       status.appendChild(a);
