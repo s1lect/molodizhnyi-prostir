@@ -318,7 +318,28 @@
   .ctile a.mail-a b { padding-top: 0; margin-top: 0; display: block; }
   .copy { font: inherit; font-size: .9rem; font-weight: 600; color: var(--ink); background: rgba(255, 255, 255, .6); border: 0; border-radius: 999px; padding: .45rem .95rem; cursor: pointer; transition: background-color .3s ease; position: relative; z-index: 2; }
   .copy:hover { background: #fff; }
-  .ctile.c1 { background: var(--sun); }
+  .ctile.ig, .ctile.tg { color: #fff; min-height: 12.5rem; }
+    .ctile.ig { background: linear-gradient(135deg, #4F5BD5 0%, #962FBF 30%, #D62976 60%, #FA7E1E 88%, #FEDA75 100%); }
+    .ctile.tg { background: #1E8FCB; }
+    .ctile.ig b, .ctile.tg b { font-size: clamp(1.1rem, 1.7vw, 1.4rem); font-weight: 900; }
+    .ctile.ig span, .ctile.tg span { font-weight: 500; max-width: 30ch; }
+    .ctile .ico { position: absolute; top: 1.2rem; right: 1.3rem; display: grid; place-items: center; width: 3.4rem; height: 3.4rem; border-radius: 50%; background: #fff; box-shadow: 0 10px 20px -10px rgba(27, 37, 89, .6); transition: transform .6s var(--ease); }
+    .ctile .ico svg { width: 1.8rem; height: 1.8rem; }
+    .ctile.ig .ico { color: #D62976; border-radius: 30%; }
+    .ctile.tg .ico { color: #1E8FCB; }
+    .ctile.tg .ico svg { transform: translate(-.08rem, .05rem); }
+    .ctile.ig::before { content: ""; position: absolute; z-index: -1; right: -3.5rem; bottom: -3.5rem; width: 11rem; height: 11rem; border-radius: 50%; border: 1.6rem solid rgba(255, 255, 255, .18); transition: transform .8s var(--ease); }
+    .ctile.tg::before { content: ""; position: absolute; z-index: -1; right: -2rem; bottom: -1.2rem; width: 10rem; height: 5rem; border-radius: 999px 999px 0 0; background: rgba(255, 255, 255, .2); transform: rotate(-18deg); transition: transform .8s var(--ease); }
+    .ctile.ig:hover::before { transform: scale(1.2); }
+    .ctile.tg:hover::before { transform: rotate(-4deg) translateY(-.6rem); }
+    .ctile.ig:hover .ico { transform: rotate(-12deg) scale(1.12); }
+    .ctile.tg:hover .ico { transform: translate(.35rem, -.35rem) rotate(8deg); }
+    .ctile.ig .go, .ctile.tg .go { background: #fff; color: var(--ink); font-weight: 600; max-width: none; }
+    html.calm .ctile.ig { background: linear-gradient(135deg, #7E6FA8, #B5657F, #C98A5E); }
+    html.calm .ctile.tg { background: #5E8CA6; }
+    html.calm .ctile.ig .ico { color: #B5657F; }
+    html.calm .ctile.tg .ico { color: #5E8CA6; }
+    .ctile.c1 { background: var(--sun); }
   .ctile.c2 { background: var(--mint); }
   .ctile.c3 { background: var(--pink); }
   .ctile.fb { background: var(--cobalt); color: #fff; min-height: 20rem; }
@@ -352,6 +373,7 @@
   .ph-note { margin: 1rem 0 0; font-size: .95rem; }
   .lic { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 3rem 5rem; align-items: center; }
   .lic p { max-width: 46ch; }
+    .lic h2 { font-size: clamp(1.6rem, 3.1vw, 2.8rem); }
   .ph-stage { position: relative; max-width: 36rem; padding: 0 2.5rem 2.5rem 0; }
   .ph-stage .ph { max-width: none; box-shadow: 0 30px 50px -28px rgba(27, 37, 89, .55); }
   .ph-back { position: absolute; inset: 3rem 0 0 3rem; border-radius: 999px 999px 14px 14px; background: var(--sun); }
@@ -650,8 +672,7 @@
         <h2 data-r="wipe">Де ми: Степанівський ліцей</h2>
         <p data-r="up" style="margin-top:1.4rem">Простір живе в стінах ліцею, який знає вся громада. Сюди ходили наші батьки, тут навчаємося ми, і саме тут тепер є місце, де після уроків можна лишитися заради власної справи.</p>
           <ul class="where" id="where" data-r="up" style="--d:.1s">
-            <li><span class="pin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.3 7-12a7 7 0 0 0-14 0c0 5.7 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg></span><div><small>Де</small><b>У приміщенні Степанівського ліцею</b><div id="where-adresa"></div></div></li>
-            <li><span class="pin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><small>Коли</small><b id="where-hodyny"></b></div></li>
+            <li><span class="pin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.3 7-12a7 7 0 0 0-14 0c0 5.7 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg></span><div><small>Де</small><b>В укритті Степанівського ліцею</b><div id="where-adresa"></div></div></li>
             <li><span class="pin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2c3 .2 5.5 2.6 5.5 5.8"/></svg></span><div><small>Для кого</small><b>Молодь громади від 14 до 35 років. Участь безкоштовна</b></div></li>
           </ul>
           <div class="where-actions" id="where-actions" data-r="up" style="--d:.2s">
@@ -798,7 +819,7 @@
   <section class="block contacts" id="kontakty" data-theme="ink">
     <div class="wrap">
       <h2 data-r="wipe">Напишіть нам</h2>
-      <p class="lead" data-r="up">Найшвидше ми відповідаємо у Facebook. Там же з'являються анонси та фото з подій.</p>
+      <p class="lead" data-r="up">Найшвидше ми відповідаємо у Facebook та Instagram, а в Telegram-каналі з'являються анонси подій.</p>
       <div class="ctiles" id="contacts">
         <a class="ctile fb" href="https://www.facebook.com/profile.php?id=61596745940322" target="_blank" rel="noopener"><small>Facebook</small><b>Наша сторінка у Facebook</b></a>
       </div>
@@ -943,10 +964,6 @@
     /* ----- Де ми ----- */
     var whereAdr = document.getElementById("where-adresa");
     if (D.adresa) whereAdr.textContent = D.adresa;
-    else { whereAdr.className = "soon"; whereAdr.textContent = "Точну адресу додамо незабаром"; }
-    var whereH = document.getElementById("where-hodyny");
-    if (D.hodyny) whereH.textContent = D.hodyny;
-    else { whereH.className = "soon"; whereH.textContent = "Графік роботи з'явиться незабаром"; }
     if (isLink(D.mapa)) {
       var mp = extLink(D.mapa, "Показати на мапі");
       mp.className = "btn alt";
@@ -994,6 +1011,18 @@
   };
   var small = function (label, value, href, ext, note) { tile(colors[ci++ % colors.length], label, value, href, ext, note); };
   if (isLink(D.facebook)) tile("fb", "Facebook", "Наша сторінка у Facebook", D.facebook.trim(), true, "Анонси, фото з подій і найшвидша відповідь на ваше повідомлення.", "Відкрити сторінку");
+    var ICO = {
+      ig: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r=".7" fill="currentColor"/></svg>',
+      tg: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.4 3.6 3 10.7c-.8.3-.8 1.100 0 1.400l4.500 1.500 10.200-6.400c.3-.2.600.200.300.400l-8 7.300-.3 4.100c0 .600.700.900 1.100.500l2.300-2.200 4.600 3.400c.6.4 1.400.1 1.600-.6l3.300-15.100c.2-.9-.6-1.700-1.200-1.400z"/></svg>'
+    };
+    var social = function (cls, label, value, href, note, go) {
+      tile(cls, label, value, href, true, note, go);
+      var a = ct.lastChild.firstChild, ic = el("i", "ico");
+      ic.setAttribute("aria-hidden", "true"); ic.innerHTML = ICO[cls];
+      a.insertBefore(ic, a.firstChild);
+    };
+    if (isLink(D.instagram)) social("ig", "Instagram", "@povirusebe.space", D.instagram.trim(), "Фото, відео та сторіз із життя простору.", "Відкрити Instagram");
+    if (isLink(D.telegram)) social("tg", "Telegram", "Наш канал у Telegram", D.telegram.trim(), "Анонси подій і новини простору.", "Приєднатися");
   if (D.email) {
     var mw = el("div", ""); mw.setAttribute("data-r", "deal"); mw.style.setProperty("--d", (ct.children.length % 3) * 0.1 + "s");
     var mt = el("div", "ctile " + colors[ci++ % colors.length]);
@@ -1012,8 +1041,6 @@
     mt.appendChild(row); mw.appendChild(mt); ct.appendChild(mw);
   }
   if (D.telefon) small("Телефон", D.telefon, "tel:" + D.telefon.replace(/[^\d+]/g, ""), false, "");
-  if (isLink(D.instagram)) small("Instagram", "Ми в Instagram", D.instagram.trim(), true, "");
-  if (isLink(D.telegram)) small("Telegram", "Канал у Telegram", D.telegram.trim(), true, "");
   if (D.adresa) small("Адреса", D.adresa, "", false, "");
   if (D.hodyny) small("Коли відкрито", D.hodyny, "", false, "");
   small("Відгуки", "Залишити відгук на сайті", "#vidhuky", false, "Порада чи побажання дійде до команди простору.");
