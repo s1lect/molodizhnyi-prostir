@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Анкета. Молодіжний простір «Повір у себе»</title>
+<meta name="description" content="Анкети молодіжного простору «Повір у себе»: реєстрація учасника та пропозиція активності.">
+<meta name="theme-color" content="#2B3FD6">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232B3FD6'/%3E%3Ccircle cx='40' cy='40' r='22' fill='%23FFC93C'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@500;700;900&display=swap" rel="stylesheet">
+<script>try{if(localStorage.getItem("calm")==="1")document.documentElement.classList.add("calm");}catch(e){}</script>
+<style>
+  :root {
+    --chalk: #EEF1FA; --ink: #1B2559; --cobalt: #2B3FD6; --deep: #1F2FA8;
+    --sun: #FFC93C; --mint: #8FE0C6; --pink: #FF5C8A;
+    --display: "Unbounded", "Arial Black", sans-serif;
+    --body: "Golos Text", "Segoe UI", Arial, sans-serif;
+    --ease: cubic-bezier(.2, .8, .2, 1);
+  }
+  @view-transition { navigation: auto; }
+  @keyframes vt-out { to { opacity: 0; transform: scale(.94); } }
+  @keyframes vt-in { from { clip-path: circle(0% at 50% 50%); } to { clip-path: circle(150% at 50% 50%); } }
+  ::view-transition-old(root) { animation: vt-out .5s var(--ease) both; }
+  ::view-transition-new(root) { animation: vt-in .8s var(--ease) both; }
+  html.calm::view-transition-old(root), html.calm::view-transition-new(root) { animation: none; }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--chalk); color: var(--ink); font-family: var(--body); font-size: 1.0625rem; line-height: 1.5; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+  h1, h2 { font-family: var(--display); line-height: 1.1; margin: 0; }
+
+  .layout { display: grid; grid-template-columns: minmax(20rem, 5fr) minmax(0, 7fr); min-height: 100svh; }
+
+  /* ---------- Ліва панель ---------- */
+  .side { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--cobalt); color: #fff; padding: 2rem 2.5rem; display: flex; flex-direction: column; isolation: isolate; }
+  .side-top { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: space-between; align-items: center; }
+  .pill { display: inline-flex; align-items: center; gap: .55rem; font: inherit; font-size: .9rem; font-weight: 500; color: var(--ink); text-decoration: none; cursor: pointer; padding: .45rem 1rem; border-radius: 999px; background: rgba(255, 255, 255, .92); border: 0; }
+  .pill:hover { background: var(--sun); }
+  .pill i { position: relative; width: 2.3rem; height: 1.35rem; border-radius: 999px; background: linear-gradient(90deg, var(--pink), var(--sun), var(--mint)); }
+  .pill i::after { content: ""; position: absolute; top: .17rem; left: .17rem; width: 1rem; height: 1rem; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(27, 37, 89, .35); transition: transform .35s var(--ease); }
+  .pill[aria-pressed="true"] i { background: #777; }
+  .pill[aria-pressed="true"] i::after { transform: translateX(.95rem); }
+  .side h1 { font-weight: 900; font-size: clamp(1.9rem, 3.4vw, 3.2rem); letter-spacing: -.02em; margin-top: auto; }
+  .side h1 span { display: block; color: var(--sun); }
+  .side .lead { margin: 1rem 0 2rem; max-width: 34ch; color: #E3E8FF; }
+  .dots { list-style: none; margin: 0 0 1rem; padding: 0; display: grid; gap: .55rem; }
+  .dots li { display: flex; align-items: center; gap: .8rem; color: #C3CCFF; font-weight: 500; transition: color .4s ease, transform .5s var(--ease); }
+  .dots li::before { content: ""; width: .8rem; height: .8rem; border-radius: 50%; border: 2px solid currentColor; transition: background-color .4s ease, transform .5s var(--ease); }
+  .dots li.done { color: #fff; }
+  .dots li.done::before { background: var(--mint); border-color: var(--mint); }
+  .dots li.now { color: var(--sun); transform: translateX(.5rem); }
+  .dots li.now::before { background: var(--sun); transform: scale(1.4); }
+  .dots li[hidden] { display: none; }
+  .blob { position: absolute; z-index: -1; transition: transform 1.1s var(--ease), border-radius 1.1s var(--ease); }
+  .blob.b1 { width: 24rem; height: 24rem; right: -9rem; top: 16%; border-radius: 50%; background: var(--deep); transform: translate(calc(var(--s, 0) * -1.5rem), calc(var(--s, 0) * 2.2rem)) scale(calc(1 - var(--s, 0) * .07)); }
+  .blob.b2 { width: 8rem; height: 4rem; left: 12%; top: 22%; border-radius: 999px 999px 0 0; background: var(--mint); transform: rotate(calc(var(--s, 0) * 55deg)) translateY(calc(var(--s, 0) * 1rem)); }
+  .blob.b3 { width: 4.5rem; height: 4.5rem; left: 46%; top: 38%; background: var(--pink); border-radius: calc(50% - var(--s, 0) * 9%); transform: rotate(calc(var(--s, 0) * 90deg)) translateX(calc(var(--s, 0) * -2rem)); }
+
+  /* ---------- Права частина ---------- */
+  .main { padding: clamp(1.5rem, 5vw, 4.5rem); display: flex; flex-direction: column; justify-content: center; }
+  .bar { height: 8px; border-radius: 8px; background: #D5DBF5; overflow: hidden; max-width: 40rem; }
+  .bar div { height: 100%; width: 100%; border-radius: 8px; background: linear-gradient(90deg, var(--cobalt), var(--pink)); transform-origin: left; transform: scaleX(var(--p, 0)); transition: transform .8s var(--ease); }
+  .count { margin: .8rem 0 2rem; font-weight: 600; color: var(--cobalt); }
+  form { max-width: 40rem; }
+  .step { display: none; }
+  .step.on { display: block; animation: in-right .65s var(--ease) both; }
+  .step.on.back { animation-name: in-left; }
+  @keyframes in-right { from { opacity: 0; transform: translateX(4rem) scale(.97); } }
+  @keyframes in-left { from { opacity: 0; transform: translateX(-4rem) scale(.97); } }
+  .step h2 { font-size: clamp(1.5rem, 3.2vw, 2.3rem); font-weight: 700; }
+  .step .hint { margin: .7rem 0 2rem; max-width: 56ch; }
+  .step.on .f { animation: rise .6s var(--ease) both; animation-delay: calc(var(--n) * 70ms + .15s); }
+  @keyframes rise { from { opacity: 0; transform: translateY(1.2rem); } }
+  .f { margin: 0 0 1.5rem; border: 0; padding: 0; min-width: 0; }
+  .f > label, .f > legend { display: block; padding: 0; font-weight: 600; margin-bottom: .5rem; }
+  .req { color: var(--pink); }
+  .help { display: block; font-weight: 400; font-size: .92rem; color: #4A5389; margin-top: .15rem; }
+  .f input[type="text"], .f input[type="tel"], .f input[type="email"], .f textarea {
+    font: inherit; color: var(--ink); background: #fff; width: 100%;
+    border: 2px solid var(--ink); border-radius: 14px; padding: .8rem 1rem;
+    transition: box-shadow .3s var(--ease), transform .3s var(--ease), border-color .3s ease;
+  }
+  .f textarea { min-height: 8rem; resize: vertical; }
+  .f input:focus, .f textarea:focus { outline: none; box-shadow: 6px 6px 0 var(--cobalt); transform: translate(-3px, -3px); }
+  .opts { display: flex; flex-wrap: wrap; gap: .6rem; }
+  .opts.col { flex-direction: column; align-items: flex-start; }
+  .opt { cursor: pointer; }
+  .opt input { position: absolute; opacity: 0; }
+  .opt span { display: inline-block; padding: .6rem 1.15rem; border-radius: 999px; border: 2px solid var(--ink); background: #fff; font-weight: 500; transition: background-color .3s ease, color .3s ease, transform .35s var(--ease), border-color .3s ease; }
+  .opt:hover span { border-color: var(--cobalt); transform: translateY(-2px); }
+  .opt input:checked + span { background: var(--cobalt); border-color: var(--cobalt); color: #fff; transform: scale(1.05) rotate(-1.5deg); }
+  .opt input:focus-visible + span { outline: 3px solid var(--pink); outline-offset: 3px; }
+  .f > label.consent, .consent { display: grid; margin: 0; grid-template-columns: 1.7rem 1fr; gap: .9rem; align-items: start; cursor: pointer; font-weight: 400 !important; padding: 1rem 1.2rem; border: 2px solid var(--ink); border-radius: 14px; background: #fff; }
+  .consent input { width: 1.5rem; height: 1.5rem; margin: .1rem 0 0; accent-color: var(--cobalt); }
+  .other { margin-top: .7rem; }
+  .other[hidden] { display: none; }
+  .err { display: none; margin-top: .45rem; font-weight: 600; color: #C2184B; }
+  .f.bad .err { display: block; animation: shake .4s ease; }
+  .f.bad input[type="text"], .f.bad input[type="tel"], .f.bad input[type="email"], .f.bad textarea, .f.bad .consent { border-color: #C2184B; }
+  @keyframes shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+  .nav { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 2.5rem; }
+  .btn { position: relative; overflow: hidden; isolation: isolate; font: inherit; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; padding: .95rem 1.8rem; border-radius: 999px; border: 0; background: var(--cobalt); color: #fff; transition: color .4s ease, transform .3s var(--ease); }
+  .btn::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--sun); transform: translateY(101%); transition: transform .45s var(--ease); }
+  .btn:hover { color: var(--ink); }
+  .btn:hover::before { transform: none; }
+  .btn:active { transform: scale(.96); }
+  .btn:disabled { opacity: .5; cursor: wait; }
+  .back-btn { font: inherit; font-weight: 500; background: none; border: 0; padding: .5rem 0; cursor: pointer; color: var(--ink); text-decoration: underline; text-underline-offset: .3em; }
+  .status { margin: 1rem 0 0; font-weight: 500; min-height: 1.5em; }
+  .note { margin: 1.5rem 0 0; font-size: .9rem; color: #4A5389; max-width: 56ch; }
+  .hp { position: absolute; left: -9999px; }
+
+  .done-screen, .pick { display: none; max-width: 40rem; }
+  .done-screen.on, .pick.on { display: block; animation: in-right .7s var(--ease) both; }
+  .done-screen h2, .pick h2 { font-size: clamp(1.7rem, 4vw, 2.8rem); font-weight: 900; }
+  .done-screen p, .pick p { margin: 1rem 0 2rem; max-width: 52ch; }
+  .tick { width: 5.5rem; height: 5.5rem; margin-bottom: 1.5rem; }
+  .tick circle { fill: var(--mint); transform-origin: center; animation: pop .6s var(--ease) both; }
+  .tick path { fill: none; stroke: var(--ink); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw .6s ease .4s forwards; }
+  @keyframes pop { from { transform: scale(0); } }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .pick-list { display: grid; gap: 1rem; }
+  .pick-list a { display: block; padding: 1.4rem 1.6rem; border-radius: 8px 30px 8px 8px; background: var(--sun); text-decoration: none; transition: transform .4s var(--ease); }
+  .pick-list a:nth-child(2) { background: var(--mint); }
+  .pick-list a:hover { transform: translateY(-6px) rotate(-1deg); }
+  .pick-list b { display: block; font-family: var(--display); font-size: 1.15rem; margin-bottom: .3rem; }
+  .bit { position: fixed; z-index: 95; width: .7rem; height: .7rem; border-radius: 2px; pointer-events: none; }
+
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; }
+    .side { position: relative; height: auto; padding: 1.25rem 1.5rem 1.75rem; }
+    .side h1 { margin-top: 2.5rem; }
+    .side .lead { margin-bottom: 0; }
+    .dots { display: none; }
+    .blob.b1 { width: 12rem; height: 12rem; right: -4rem; top: 30%; }
+    .blob.b2, .blob.b3 { display: none; }
+    .main { justify-content: flex-start; }
+  }
+  html.calm { filter: grayscale(1); }
+  html.calm *, html.calm *::before, html.calm *::after { animation: none !important; transition: none !important; }
+  html.calm .tick path { stroke-dashoffset: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .tick path { stroke-dashoffset: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="side" id="side">
+    <div class="blob b1" aria-hidden="true"></div>
+    <div class="blob b2" aria-hidden="true"></div>
+    <div class="blob b3" aria-hidden="true"></div>
+    <div class="side-top">
+      <a class="pill" href="index.html#ankety">На головну</a>
+      <button class="pill" id="calm" type="button" aria-pressed="false" title="Вимикає кольори та анімації"><i aria-hidden="true"></i>Спокійний режим</button>
+    </div>
+    <h1 id="f-title">Анкети <span>простору «Повір у себе»</span></h1>
+    <p class="lead" id="f-lead">Оберіть анкету, яка вам потрібна.</p>
+    <ol class="dots" id="dots"></ol>
+  </aside>
+
+  <main class="main">
+    <div class="pick" id="pick">
+      <h2>Яку анкету заповнити?</h2>
+      <p>Вони різні: одна для майбутніх учасників простору, друга для ідей від громади.</p>
+      <div class="pick-list">
+        <a href="anketa.html?f=reyestratsiia"><b>Реєстрація учасника</b>Для молоді віком від 14 до 35 років, яка хоче долучитися до простору.</a>
+        <a href="anketa.html?f=propozytsiia"><b>Пропозиція активності</b>Для всіх мешканців громади: запропонуйте подію, гурток чи проєкт.</a>
+      </div>
+    </div>
+
+    <div id="wizard" hidden>
+      <div class="bar" aria-hidden="true"><div id="bar"></div></div>
+      <p class="count" id="count" aria-live="polite"></p>
+      <form id="form" novalidate>
+        <label class="hp" aria-hidden="true">Не заповнюйте це поле<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
+        <div id="steps"></div>
+        <div class="nav">
+          <button class="btn" type="submit" id="next">Далі</button>
+          <button class="back-btn" type="button" id="back" hidden>Назад</button>
+        </div>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+        <p class="note">Відповіді надходять на електронну пошту команди простору через сервіс FormSubmit і використовуються лише для роботи молодіжного простору «Повір у себе».</p>
+      </form>
+    </div>
+
+    <div class="done-screen" id="done">
+      <svg class="tick" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48"/><path d="M28 52l15 15 30-33" pathLength="1"/></svg>
+      <h2 id="done-title">Анкету надіслано</h2>
+      <p id="done-text"></p>
+      <a class="btn" href="index.html">Повернутися на сайт</a>
+    </div>
+  </main>
+</div>
+
+<script src="dani.js"></script>
+<script>
+(function () {
+  var D = window.DANI || {};
+  var root = document.documentElement;
+  var NAPRIAMY = ["Волонтерство", "Культура і творчість", "Спорт та активний відпочинок", "Молодіжні проєкти", "Тренінги й неформальна освіта", "Медіа та соціальні мережі", "Екологічні ініціативи", "Профорієнтація", "Настільні ігри та спілкування"];
+  var ZHODA = "Надаю згоду на обробку зазначених у цій анкеті персональних даних виключно для організації роботи молодіжного простору «Повір у себе».";
+
+  /* ====== Запитання обох анкет. Тексти можна змінювати тут. ====== */
+  var FORMS = {
+    reyestratsiia: {
+      title: "Реєстрація", accent: "учасника простору",
+      lead: "Для молоді віком від 14 до 35 років, яка хоче долучитися до молодіжного простору на базі Степанівського ліцею.",
+      subject: function (v) { return "Реєстрація учасника: " + v.pib; },
+      done: "Дякуємо! Координатор простору зв'яжеться з вами найближчим часом.",
+      steps: [
+        { title: "Знайомство", hint: "Розкажіть, хто ви і як з вами зв'язатися.", fields: [
+          { name: "pib", label: "Прізвище, ім'я та по батькові", type: "text", req: true, auto: "name" },
+          { name: "telefon", label: "Номер телефону", type: "tel", req: true, help: "Наприклад: +380 67 123 45 67", auto: "tel" },
+          { name: "poshta", label: "Електронна адреса", type: "email", req: true, auto: "email" },
+          { name: "punkt", label: "Населений пункт", type: "text", help: "Село, селище або місто, де ви живете." },
+          { name: "vik", label: "Вікова категорія", type: "radio", req: true, options: ["14–17 років", "18–24 роки", "25–29 років", "30–35 років"] }
+        ] },
+        { title: "Для учасників до 18 років", when: function (v) { return v.vik === "14–17 років"; },
+          hint: "Участь неповнолітніх і використання їхніх зображень погоджуються з одним із батьків або законним представником. Вкажіть його контакти.", fields: [
+          { name: "batky_pib", label: "Прізвище, ім'я та по батькові одного з батьків або законного представника", type: "text", req: true },
+          { name: "batky_telefon", label: "Номер телефону одного з батьків або законного представника", type: "tel", req: true },
+          { name: "batky_zhoda", label: "Погодження участі", type: "consent", req: true, text: "Мої батьки або законний представник знають про цю анкету і погоджуються на мою участь у молодіжному просторі." }
+        ] },
+        { title: "Навчання або робота", hint: "Це допоможе планувати події у зручний для вас час.", fields: [
+          { name: "status", label: "Ваш статус", type: "radio", req: true, other: true, options: ["Учень/учениця", "Студент/студентка", "Працюю", "Тимчасово не навчаюся і не працюю"] },
+          { name: "zaklad", label: "Назва закладу освіти або місця роботи", type: "text" },
+          { name: "klas", label: "Клас або курс", type: "text" }
+        ] },
+        { title: "Інтереси та ідеї", hint: "Від ваших відповідей залежить, які події та гуртки з'являться у просторі.", fields: [
+          { name: "napriamy", label: "Які напрями діяльності вас цікавлять?", type: "checks", req: true, other: true, help: "Можна обрати кілька.", options: NAPRIAMY },
+          { name: "chomu", label: "Чому ви хочете долучитися до молодіжного простору?", type: "textarea", req: true },
+          { name: "idei", label: "Які власні ідеї або пропозиції ви маєте?", type: "textarea" },
+          { name: "format", label: "У якому форматі вам зручно брати участь?", type: "checks", req: true, help: "Можна обрати кілька.", options: ["Очно", "Дистанційно", "У змішаному форматі"] }
+        ] },
+        { title: "Згоди", hint: "Ваші дані бачить лише команда простору. Для учасників до 18 років участь і використання зображень додатково погоджуються з одним із батьків або законним представником.", fields: [
+          { name: "zhoda_dani", label: "Згода на обробку персональних даних", type: "consent", req: true, text: ZHODA },
+          { name: "zhoda_foto", label: "Згода на фото- та відеозйомку", type: "radio", req: true, options: ["Надаю згоду", "Не надаю згоди"] },
+          { name: "zhoda_publ", label: "Згода на оприлюднення фото- і відеоматеріалів у соціальних мережах та на інформаційних ресурсах молодіжного простору", type: "radio", req: true, options: ["Надаю згоду", "Не надаю згоди"] }
+        ] }
+      ]
+    },
+    propozytsiia: {
+      title: "Пропозиція", accent: "активності для простору",
+      lead: "Для всіх мешканців громади. Розкажіть, яку подію, гурток чи проєкт варто провести у молодіжному просторі.",
+      subject: function (v) { return "Пропозиція активності: " + v.nazva; },
+      done: "Дякуємо за ідею! Команда простору розгляне її та зв'яжеться з вами.",
+      steps: [
+        { title: "Хто пропонує", hint: "Щоб ми могли уточнити деталі й розповісти, що вирішили.", fields: [
+          { name: "imia", label: "Ім'я та прізвище", type: "text", req: true, auto: "name" },
+          { name: "khto", label: "Хто ви для громади?", type: "radio", req: true, other: true, options: ["Учень/учениця", "Студент/студентка", "Батько або мати", "Педагог", "Мешканець громади", "Представник організації"] },
+          { name: "telefon", label: "Номер телефону", type: "tel", req: true, auto: "tel" },
+          { name: "poshta", label: "Електронна адреса", type: "email", auto: "email" }
+        ] },
+        { title: "Ваша ідея", hint: "Опишіть так, щоб її зрозуміла людина, яка чує про неї вперше.", fields: [
+          { name: "nazva", label: "Назва активності", type: "text", req: true, help: "Наприклад: вечір настільних ігор, толока, майстер-клас із відеомонтажу." },
+          { name: "napriam", label: "До якого напряму вона належить?", type: "checks", req: true, other: true, help: "Можна обрати кілька.", options: NAPRIAMY },
+          { name: "opys", label: "Що саме ви пропонуєте?", type: "textarea", req: true },
+          { name: "dlia_koho", label: "Для кого ця активність?", type: "checks", req: true, options: ["Молодь 14–17 років", "Молодь 18–24 роки", "Молодь 25–35 років", "Уся громада"] },
+          { name: "koryst", label: "Що вона дасть молоді або громаді?", type: "textarea" }
+        ] },
+        { title: "Як це зробити", hint: "Приблизно, без точних розрахунків.", fields: [
+          { name: "koly", label: "Коли це варто провести?", type: "text", help: "Дата, місяць або пора року." },
+          { name: "format", label: "У якому форматі?", type: "radio", req: true, options: ["Очно у просторі", "Дистанційно", "У змішаному форматі", "Поза ліцеєм, у громаді"] },
+          { name: "potriby", label: "Що для цього потрібно?", type: "checks", other: true, help: "Можна обрати кілька.", options: ["Приміщення", "Техніка", "Матеріали", "Кошти", "Волонтери", "Запрошений фахівець"] },
+          { name: "uchast", label: "Чи готові ви долучитися до організації?", type: "radio", req: true, options: ["Так, можу провести сам або сама", "Так, допоможу команді", "Ні, лише пропоную ідею"] },
+          { name: "zhoda_dani", label: "Згода на обробку персональних даних", type: "consent", req: true, text: ZHODA }
+        ] }
+      ]
+    }
+  };
+
+  var el = function (tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; };
+  var calm = function () { return root.classList.contains("calm") || window.matchMedia("(prefers-reduced-motion: reduce)").matches; };
+
+  var calmBtn = document.getElementById("calm");
+  calmBtn.setAttribute("aria-pressed", root.classList.contains("calm") ? "true" : "false");
+  calmBtn.addEventListener("click", function () {
+    var on = !root.classList.contains("calm");
+    root.classList.toggle("calm", on);
+    calmBtn.setAttribute("aria-pressed", on ? "true" : "false");
+    try { localStorage.setItem("calm", on ? "1" : "0"); } catch (e) {}
+  });
+
+  var key = (new URLSearchParams(location.search).get("f") || "").toLowerCase();
+  var F = Object.prototype.hasOwnProperty.call(FORMS, key) ? FORMS[key] : null;
+  if (!F) { document.getElementById("pick").classList.add("on"); return; }
+
+  document.title = F.title + " " + F.accent + ". Молодіжний простір «Повір у себе»";
+  var h1 = document.getElementById("f-title");
+  h1.textContent = F.title + " ";
+  h1.appendChild(el("span", "", F.accent));
+  document.getElementById("f-lead").textContent = F.lead;
+  document.getElementById("wizard").hidden = false;
+
+  var form = document.getElementById("form");
+  var stepsBox = document.getElementById("steps");
+  var dots = document.getElementById("dots");
+  var next = document.getElementById("next");
+  var back = document.getElementById("back");
+  var status = document.getElementById("status");
+  var uid = 0;
+
+  /* ----- Побудова полів ----- */
+  function buildField(f, n) {
+    var id = "q" + (++uid);
+    var group = f.type === "radio" || f.type === "checks";
+    var box = el(group ? "fieldset" : "div", "f");
+    box.style.setProperty("--n", n);
+    box.dataset.name = f.name;
+    var lab = el(group ? "legend" : "label", "", f.label);
+    if (!group && f.type !== "consent") lab.htmlFor = id;
+    if (f.req) { var star = el("span", "req", " *"); star.setAttribute("aria-hidden", "true"); lab.appendChild(star); }
+    if (f.help) lab.appendChild(el("span", "help", f.help));
+    if (f.type !== "consent") box.appendChild(lab);
+
+    if (f.type === "text" || f.type === "tel" || f.type === "email") {
+      var inp = el("input"); inp.type = f.type; inp.id = id; inp.name = f.name; inp.maxLength = 200;
+      if (f.auto) inp.autocomplete = f.auto;
+      if (f.req) inp.setAttribute("aria-required", "true");
+      box.appendChild(inp);
+    } else if (f.type === "textarea") {
+      var ta = el("textarea"); ta.id = id; ta.name = f.name; ta.maxLength = 3000;
+      if (f.req) ta.setAttribute("aria-required", "true");
+      box.appendChild(ta);
+    } else if (group) {
+      var opts = el("div", "opts");
+      var list = f.options.slice(); if (f.other) list.push("Інше");
+      list.forEach(function (o) {
+        var l = el("label", "opt"); var i = el("input");
+        i.type = f.type === "radio" ? "radio" : "checkbox"; i.name = f.name; i.value = o;
+        l.appendChild(i); l.appendChild(el("span", "", o)); opts.appendChild(l);
+      });
+      box.appendChild(opts);
+      if (f.other) {
+        var ot = el("input", "other"); ot.type = "text"; ot.name = f.name + "_inshe"; ot.maxLength = 200; ot.hidden = true;
+        ot.setAttribute("aria-label", "Уточніть свій варіант"); ot.placeholder = "Уточніть свій варіант";
+        box.appendChild(ot);
+        opts.addEventListener("change", function () {
+          var on = !!opts.querySelector('input[value="Інше"]:checked');
+          ot.hidden = !on; if (on) ot.focus();
+        });
+      }
+    } else if (f.type === "consent") {
+      var head = el("div", "", f.label); head.style.fontWeight = "600"; head.style.marginBottom = ".5rem";
+      if (f.req) { var st = el("span", "req", " *"); st.setAttribute("aria-hidden", "true"); head.appendChild(st); }
+      box.appendChild(head);
+      var c = el("label", "consent"); var cb = el("input"); cb.type = "checkbox"; cb.name = f.name; cb.value = "Так";
+      c.appendChild(cb); c.appendChild(el("span", "", f.text)); box.appendChild(c);
+    }
+    var err = el("div", "err"); err.id = id + "e"; err.setAttribute("role", "alert"); box.appendChild(err);
+    box.addEventListener("input", function () { box.classList.remove("bad"); });
+    box.addEventListener("change", function () { box.classList.remove("bad"); });
+    return box;
+  }
+
+  F.steps.forEach(function (s, i) {
+    var sec = el("section", "step");
+    var h = el("h2", "", s.title); h.tabIndex = -1; sec.appendChild(h);
+    if (s.hint) sec.appendChild(el("p", "hint", s.hint));
+    s.fields.forEach(function (f, n) { sec.appendChild(buildField(f, n)); });
+    stepsBox.appendChild(sec); s.node = sec;
+    var d = el("li", "", s.title); dots.appendChild(d); s.dot = d;
+  });
+
+  /* ----- Читання відповідей ----- */
+  function valueOf(f) {
+    if (f.type === "radio") {
+      var r = form.querySelector('input[name="' + f.name + '"]:checked');
+      if (!r) return "";
+      return r.value === "Інше" ? "Інше: " + form[f.name + "_inshe"].value.trim() : r.value;
+    }
+    if (f.type === "checks") {
+      return Array.prototype.map.call(form.querySelectorAll('input[name="' + f.name + '"]:checked'), function (c) {
+        return c.value === "Інше" ? "Інше: " + form[f.name + "_inshe"].value.trim() : c.value;
+      }).join("; ");
+    }
+    if (f.type === "consent") return form[f.name].checked ? "Так" : "";
+    return form[f.name].value.trim();
+  }
+  function values() { var v = {}; F.steps.forEach(function (s) { s.fields.forEach(function (f) { v[f.name] = valueOf(f); }); }); return v; }
+  function active() { var v = values(); return F.steps.filter(function (s) { return !s.when || s.when(v); }); }
+
+  function check(step) {
+    var first = null;
+    step.fields.forEach(function (f) {
+      var box = step.node.querySelector('[data-name="' + f.name + '"]');
+      var val = valueOf(f), msg = "";
+      if (f.req && !val) msg = f.type === "consent" ? "Без цієї згоди ми не можемо прийняти анкету." : (f.type === "radio" || f.type === "checks") ? "Оберіть варіант." : "Заповніть це поле.";
+      else if (val && f.type === "email" && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val)) msg = "Перевірте адресу: у ній має бути знак @ і крапка.";
+      else if (val && f.type === "tel" && !/^\+?[0-9][0-9 ()\-]{8,17}$/.test(val)) msg = "Вкажіть номер цифрами, наприклад +380 67 123 45 67.";
+      else if (/Інше: (;|$)/.test(val + ";")) msg = "Уточніть свій варіант у полі «Інше».";
+      box.classList.toggle("bad", !!msg);
+      box.querySelector(".err").textContent = msg;
+      if (msg && !first) first = box;
+    });
+    if (first) { var t = first.querySelector("input, textarea"); if (t) t.focus(); }
+    return !first;
+  }
+
+  /* ----- Перехід між кроками ----- */
+  var cur = F.steps[0];
+  function show(step, dir) {
+    var act = active(), idx = act.indexOf(step);
+    F.steps.forEach(function (s) {
+      s.node.classList.remove("on", "back");
+      s.dot.hidden = act.indexOf(s) < 0;
+      s.dot.classList.toggle("done", act.indexOf(s) > -1 && act.indexOf(s) < idx);
+      s.dot.classList.toggle("now", s === step);
+    });
+    void step.node.offsetWidth;
+    step.node.classList.add("on"); if (dir < 0) step.node.classList.add("back");
+    cur = step;
+    document.getElementById("bar").style.setProperty("--p", (idx + 1) / act.length);
+    document.getElementById("count").textContent = "Крок " + (idx + 1) + " з " + act.length;
+    document.getElementById("side").style.setProperty("--s", idx);
+    back.hidden = idx === 0;
+    next.textContent = idx === act.length - 1 ? "Надіслати анкету" : "Далі";
+    status.textContent = "";
+    if (dir) { step.node.querySelector("h2").focus({ preventScroll: true }); document.querySelector(".main").scrollIntoView({ behavior: calm() ? "auto" : "smooth", block: "start" }); }
+  }
+  show(cur, 0);
+
+  back.addEventListener("click", function () { var a = active(), i = a.indexOf(cur); if (i > 0) show(a[i - 1], -1); });
+
+  function confetti() {
+    if (calm() || !document.body.animate) return;
+    var colors = ["#2B3FD6", "#FFC93C", "#FF5C8A", "#8FE0C6", "#FFFFFF"];
+    for (var i = 0; i < 60; i++) {
+      var b = el("span", "bit");
+      b.style.left = window.innerWidth * (0.55 + Math.random() * 0.2) + "px"; b.style.top = window.innerHeight * 0.45 + "px";
+      b.style.background = colors[i % colors.length];
+      document.body.appendChild(b);
+      var a = Math.random() * Math.PI * 2, d = 120 + Math.random() * 320;
+      b.animate([
+        { transform: "translate(0,0) rotate(0deg)", opacity: 1 },
+        { transform: "translate(" + Math.cos(a) * d + "px," + (Math.sin(a) * d - 160) + "px) rotate(" + (Math.random() * 720 - 360) + "deg)", opacity: 1, offset: .7 },
+        { transform: "translate(" + Math.cos(a) * d * 1.1 + "px," + (Math.sin(a) * d + 220) + "px) rotate(720deg)", opacity: 0 }
+      ], { duration: 1500 + Math.random() * 800, easing: "cubic-bezier(.2,.8,.2,1)" }).onfinish = (function (n) { return function () { n.remove(); }; })(b);
+    }
+  }
+
+  var mail = (D.email || "").trim();
+  var mailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail);
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!check(cur)) return;
+    var act = active(), i = act.indexOf(cur);
+    if (i < act.length - 1) { show(act[i + 1], 1); return; }
+    if (form._honey.value) return;
+    if (!mailOk) { status.textContent = "Анкета тимчасово не приймає відповіді. Напишіть нам у Facebook."; return; }
+    var v = values();
+    var data = { _subject: F.subject(v), _template: "table", _captcha: "false" };
+    act.forEach(function (s) { s.fields.forEach(function (f) { data[f.label] = v[f.name] || "не вказано"; }); });
+    next.disabled = true; status.textContent = "Надсилаємо…";
+    fetch("https://formsubmit.co/ajax/" + encodeURI(mail), {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(data)
+    }).then(function (r) { return r.json(); }).then(function (j) {
+      if (!(j && (j.success === true || j.success === "true"))) throw new Error("fail");
+      document.getElementById("wizard").hidden = true;
+      document.getElementById("done-text").textContent = F.done;
+      document.getElementById("done").classList.add("on");
+      F.steps.forEach(function (s) { s.dot.classList.remove("now"); if (!s.dot.hidden) s.dot.classList.add("done"); });
+      confetti();
+    }).catch(function () {
+      next.disabled = false;
+      status.textContent = "Не вдалося надіслати. Перевірте інтернет і спробуйте ще раз або напишіть на " + mail + ".";
+    });
+  });
+})();
+</script>
+</body>
+</html>
