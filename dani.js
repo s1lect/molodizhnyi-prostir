@@ -75,7 +75,7 @@ window.DANI = {
     {
       nazva: "Реєстрація учасника",
       opys: "Для молоді віком від 14 до 35 років, яка хоче долучитися до простору. Близько 5 хвилин.",
-      posylannia: "anketa.html?f=reyestratsiia",
+      posylannia: "https://forms.gle/2sr3Dy347TJKtX5o9",
       do: ""
     },
     {
